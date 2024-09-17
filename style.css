@@ -1,0 +1,26 @@
+.articles ul {
+    display: flex;
+    flex-wrap: wrap; 
+    list-style-type: none; 
+    padding: 0;
+}
+
+.articles li {
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+    border: 1px solid #ddd;
+    padding: 10px;
+    width: 300px; 
+}
+
+.articles img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.citation {
+    margin-top: auto;
+    text-align: right;
+}
