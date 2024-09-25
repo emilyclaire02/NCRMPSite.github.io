@@ -1,17 +1,36 @@
-.articles ul {
-    display: flex;
-    flex-wrap: wrap; 
-    list-style-type: none; 
-    padding: 0;
+html {
+    font-family: Cambria, "Arial Narrow", Calibri, sans-serif;
 }
 
-.articles li {
+body {
+    margin: auto;
+    background-color: #E4F0F8;
+    color: #00467F;
+}
+
+.articles {
+    align-items: center;     
+    justify-content: center;  
+    padding: 20px;       
+}
+
+#articleList {
+    display: flex;
+    flex-wrap: wrap;
+    list-style-type: none;
+    align-items: center;     
+    justify-content: center;  
+    padding: 0;
+    margin: 0; /* Reset margin to prevent extra space around the list */
+}
+
+#articleList li{
     display: flex;
     flex-direction: column;
     margin: 10px;
     border: 1px solid #ddd;
     padding: 10px;
-    width: 300px; 
+    width: 25vw; 
 }
 
 .articles img {
@@ -24,3 +43,97 @@
     margin-top: auto;
     text-align: right;
 }
+
+#search {
+    display: flex;
+    justify-content: center;  /* Center horizontally */
+    margin-top: 20px;  /* Adjust the top margin if needed */
+    border-color: #00467F;
+}
+
+#searchInput {
+    width: 50%;  /* Set the width of the input field (adjust as needed) */
+    padding: 10px;  /* Add padding for better spacing inside the search bar */
+    font-size: 16px;  /* Adjust font size */
+}
+
+.topnav {
+    background-color: #0093D0;
+    overflow: hidden;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    position: absolute; /* Optional: to make the navbar stick to the top */
+    top: 0;
+    left: 0;
+}
+  
+.topnav a {
+    float: left;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+  
+.topnav a:hover {
+    background-color: #59B9E0;
+    color: black;
+}
+  
+.topnav a.active {
+    background-color: #00467F;
+    color: white;
+}
+
+#banner {
+    width: 100vw; 
+    height: auto; 
+    max-height: 100vh;
+    object-fit: contain; 
+    display: flex;
+    margin: auto;
+    justify-content: center;  /* Center horizontally */
+    align-items: center;  /* Center vertically */
+}
+
+@media (min-width: 1024px) {
+    #banner {
+        width: 70vw;  /* Make the image smaller, e.g., 50% of the viewport width */
+        height: auto; /* Maintain aspect ratio */
+    }
+}
+
+.img-container {
+    position: relative;
+    display: inline-block; /* Makes the container fit around the image */
+}
+
+.img-container img {
+    display: block; /* Removes bottom space below image */
+    width: 100%; /* Adjust width as needed */
+    height: auto; /* Maintains aspect ratio */
+}
+
+.bullet-points {
+    position: absolute;
+    top: 0px; /* Adjust as needed */
+    left: 0px; /* Adjust as needed */
+    right: 0; /* Adjust as needed */
+    bottom: 0; /* Adjust as needed */
+    display: none;
+    background: rgba(255, 255, 255, 0.8); /* Optional: Add background for better visibility */
+    padding: 10px; /* Add some padding */
+    list-style-type: disc; /* Bulleted list */
+}
+
+.bullet-points ul {
+    list-style-type: disc;
+    display: none;
+}
+
+.img-container:hover .bullet-points {
+    display: block; /* Show bullet points on hover */
+}
+

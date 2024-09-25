@@ -15,11 +15,27 @@
 
 
 <body>
-    <h1>Publications</h1>
-    <a href="./index.html">home</a>
+
+    <div class="topnav">
+        <a href="./index.html">Home</a>
+        <a class="active" href="./publications.html">Publications</a>
+        <a href="">About</a>
+    </div>
+
+    <br>
+
+    <img src="pictures/banner.png" alt="scubadiver" id="banner">
+
     <br><br>
     <div id="search">
         <input type="text" id="searchInput" placeholder="Search Publications...">
+        <br>
+        Sort by: <select id="sortBy">
+            <option value="dateNew">Date (Newest-Oldest)</option>
+            <option value="dateOld">Date (Oldest-Newest)</option>
+            <option value="titleA">Title (A-Z)</option>
+            <option value="titleZ">Title (Z-A)</option>
+        </select>
     </div>
 
     <div class="articles" id="articles-container"></div>

@@ -6,6 +6,9 @@ function displayArticles() {
     // Get the container from the html document
     const articlesContainer = document.getElementById('articles-container');
 
+    // Clear the existing articles
+    articlesContainer.innerHTML = '';
+
     // Create the main list element for all articles
     const ul = document.createElement('ul');
     ul.id = "articleList"
@@ -34,9 +37,13 @@ function displayArticles() {
         authors.textContent = authorsText;
 
         // Image of the article
+        const imgContainer = document.createElement('div');
+        imgContainer.classList.add('img-container');
+
         const img = document.createElement('img');
         img.src = article.image;
         img.alt = "image";
+        imgContainer.appendChild(img);
 
         // Citation button
         const citationButton = document.createElement('button');
@@ -49,6 +56,7 @@ function displayArticles() {
 
         // Create the list for article bullet points
         const bulletPointsList = document.createElement('ul');
+        bulletPointsList.classList.add('bullet-points');
         const bulletPoints = article.bulletPoints;
         // Add all bullet points to a list
         bulletPoints.forEach(point => {
@@ -57,12 +65,14 @@ function displayArticles() {
             bulletPointsList.appendChild(entry);
         });
 
+        // Add bullet points to the image container so they can be displayed over the image
+        imgContainer.appendChild(bulletPointsList);
+
         // Add elements to the list item
         li.appendChild(title);
         li.appendChild(authors);
-        li.appendChild(img);
+        li.appendChild(imgContainer);
         li.appendChild(citationDiv);
-        li.appendChild(bulletPointsList);
 
         // Add the list item to the main articles list
         ul.appendChild(li);
@@ -114,13 +124,35 @@ function lookThrough(content, filter) {
     return content.toUpperCase().indexOf(filter) > -1;
 }
 
+function sortArticles(filter) {
+    if (filter == "titleA") {
+        articles.sort((a, b) => a.title.localeCompare(b.title));
+    } else if (filter == "titleZ") {
+        articles.sort((a, b) => b.title.localeCompare(a.title));
+    } else if (filter == "dateOld") {
+        articles.sort((a, b) => new Date(a.date) - new Date(b.date));
+    } else if (filter == "dateNew") {
+        articles.sort((a, b) => new Date(b.date) - new Date(a.date));
+    }
+
+    displayArticles();
+}
+
 // When the page is loaded
 window.onload = function() {
     // Show all the articles
-    displayArticles();
+    sortArticles("dateNew");
     // An event listener for when the search is being used
     document.getElementById("searchInput").onkeyup = function() {
         // Call the search when the key is released
         search();
     };
+
+    document.getElementById('sortBy').addEventListener('change', function() {
+        // Get the selected value
+        const selectedValue = this.value;
+        
+        // Sort the articles by the selected value
+        sortArticles(selectedValue);
+    });
 };

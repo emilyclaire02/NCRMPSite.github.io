@@ -8,15 +8,17 @@ class Article {
      * @param {string} image
      * @param {string[]} authors
      * @param {number} year
+     * @param {date} date
      */
 
-    constructor(title, citation, bulletPoints, image, authors, year) {
+    constructor(title, citation, bulletPoints, image, authors, year, date) {
         this.title = title;
         this.citation = citation;
         this.bulletPoints = bulletPoints;
         this.image = image;
         this.authors = authors;
         this.year = year;
+        this.date = date;
     }
 }
 
@@ -31,7 +33,8 @@ class Article {
         ["Bullet Point 1", "Bullet Point 2", "Bullet Point 3", "Bullet point 4"],
         "pictures/image.png",
         ["Author 1","Author 2","Author 3","Author 4","Author 5"],
-        2024
+        2024,
+        "YYYY-MM-DD"
     )
 
 */
@@ -43,7 +46,8 @@ const articles = [
         ["Comprehensive data on fish communities across a seascape scale", "Understanding the ecology and conservation of fishes in the western Atlantic.", "Stratified-random visual fish census", "Factors that drive fish communities on coral reefs"],
         "pictures/depth.png",
         ["Laura Jay W Grove","Jeremiah Blondeau","Sarah L Heidmann","Viktor W Brandtneris","Tyler B Smith", "Lauren K Olinger", "Rosmin S Ennis"],
-        2024
+        2024,
+        "2024-01-03"
     ),
     new Article(
         "A quantitative assessment of the status of reef fish communities from a large-scale probability survey in southern Florida",
@@ -51,7 +55,8 @@ const articles = [
         ["Ecosystem-scale evaluation of reef fish community status", "Large-scale diver surveys", "Identified habitat quality issues in southeast Florida", "Fishing issues throughout the ecosystem"],
         "pictures/probability.png",
         ["Laura Jay W Grove","Jeremiah Blondeau","Steven G Smith", "Jerald S Ault"],
-        2024
+        2024,
+        "2023-09-14"
     ),
     new Article(
         "Expansion of an established fishery-independent survey into the US Virgin Islands' upper mesophotic zone: feasibility and management implications",
@@ -59,7 +64,8 @@ const articles = [
         ["Established fishery-independent, diver-based reef fish visual survey to upper mesophotic reefs", "United States Caribbean", "Grouper, snapper, triggerfish, and parrotfish"],
         "pictures/hardbottomhabitat.png",
         ["Laura Jay W Grove","Jeremiah Blondeau","Dione W Swanson","Sarah L Heidmann","Steven G Smith","Matthew W Johnson","Viktor W Brandtneris","Skyler R Sagarese","Tyler B Smith"],
-        2024
+        2024,
+        "2023-10-09"
     ),
     new Article(
         "Quantifying hurricane impacts on United States Virgin Islands reef fishes using a catchability invariant approach to compare uncalibrated survey indices",
@@ -67,7 +73,8 @@ const articles = [
         ["Identify reef fish community impacts following extreme events", "Ecologically important fish species subject to frequent severe weather disturbances", "Caribbean Sea", ],
         "pictures/hurricane.png",
         ["Caitlin Langwiser", "Nathan R Vaughan", "Laura Jay W Grove"],
-        2024
+        2024,
+        "2023-10-05"
     ),
     new Article(
         "A quantitative assessment of the status of benthic communities on US Atlantic coral reefs using a novel standardized approach",
@@ -75,7 +82,8 @@ const articles = [
         ["Data-driven evaluation of the status of corals and benthic communities in US Atlantic coral reef jurisdictions", "Florida, Flower Garden Banks, Puerto Rico, and the US Virgin Islands", "Findings show continued declines for multiple indicators in all regions except Flower Garden Banks", "Stony Coral Tissue Loss Disease"],
         "pictures/jurisdictions.png",
         ["T Shay Viehman", "Sarah H Groves", "Laura Jay W Grove", "Steven G Smith", "Laura Mudge", "Caroline Donovan", "Kimberly Edwards", "Erica K Towle"],
-        2024
+        2024,
+        "2023-05-09"
     ),
     new Article(
         "Integrating the US Caribbean Reef Fish Visual Census into fishery stock assessments",
@@ -83,7 +91,8 @@ const articles = [
         ["Quantitative information for data-poor fisheries to support regional stock assessments", "Probabilistic stratified random sampling design capitalizing on the strong mean-variance relationship of population abundance dependent on hardbottom habitats and depths.", "Statistical catch at age models"],
         "pictures/forklength.png",
         ["Jerald S Ault", "Jeremiah Blondeau", "Laura Jay W Grove", "Shannon L Cass-Calay", "Kevin J McCarthy"],
-        2024
+        2024,
+        "2023-11-08"
     ),
     new Article(
         "Distribution and abundance of herbivorous reef fishes on a barrier reef system in the Florida Keys and Dry Tortugas, Florida",
@@ -91,7 +100,8 @@ const articles = [
         ["Habitat influences spatial patterns of herbivorous fish densities and species richness", "Florida Keys and Dry Tortugas", "Underwater visual surveys", "Herbivore occurrence, density, and species richness increased as percent of low relief hardbottom habitat"],
         "pictures/herbivore.png",
         ["Jennifer L Herbig", "Jack C Olson", "Jessica A Keller", "Laura Jay W Grove", "Colin P Shea", "Alejandro Acosta"],
-        2024
+        2022,
+        "2022-10-05"
     ),
     new Article(
         "Low net carbonate accretion characterizes Florida’s coral reef",
@@ -99,7 +109,8 @@ const articles = [
         ["Benthic cover and parrotfish demographic data", "Results highlight the erosional state of the majority of the study sites", "Mid-channel reefs in the Florida Keys have the highest net carbonate production", "Florida reefs are in a net erosional state"],
         "pictures/spatial.png",
         ["JohnT. Morris", "Ian C. Enochs", "Nicole Besemer", "T. ShayViehman", "Sarah H.Groves", "Jeremiah Blondeau", "CoryAmes", "Erica K.Towle", "Laura Jay W.Grove", "Derek P. Manzello"],
-        2022
+        2022,
+        "2022-11-15"
     )
 ];
 
