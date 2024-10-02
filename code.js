@@ -135,21 +135,21 @@ function lookThrough(content, filter) {
 }
 
 function sortArticles(filter) {
-    if (filter == "titleA") {
+    if (filter == "titleA") { // Sorting by the titles from A-Z
         articles.sort((a, b) => a.title.localeCompare(b.title));
-    } else if (filter == "titleZ") {
+    } else if (filter == "titleZ") { // Sorting by the titles from Z-A
         articles.sort((a, b) => b.title.localeCompare(a.title));
-    } else if (filter == "dateOld") {
+    } else if (filter == "dateOld") { // Sorting by the dates from Oldest-Newest
         articles.sort((a, b) => new Date(a.date) - new Date(b.date));
-    } else if (filter == "dateNew") {
+    } else if (filter == "dateNew") { // Sorting by the dates from Newest-Oldest
         articles.sort((a, b) => new Date(b.date) - new Date(a.date));
-    } else if (filter == "authorA") {
+    } else if (filter == "authorA") { // Sorting by the authors' last name from A-Z
         articles.sort((a, b) => {
-            const lastNameA = a.authors[0].split(" ").slice(-1)[0];  // Get the last word of the first author
-            const lastNameB = b.authors[0].split(" ").slice(-1)[0];  // Get the last word of the first author
+            const lastNameA = a.authors[0].split(" ").slice(-1)[0];  // Get the last name of the first author
+            const lastNameB = b.authors[0].split(" ").slice(-1)[0];  // Get the last name of the first author
             return lastNameA.localeCompare(lastNameB);
         });
-    } else if (filter == "authorZ") {
+    } else if (filter == "authorZ") { // Sorting by the authors' last name from Z-A
         articles.sort((a, b) => {
             const lastNameA = a.authors[0].split(" ").slice(-1)[0];
             const lastNameB = b.authors[0].split(" ").slice(-1)[0];
