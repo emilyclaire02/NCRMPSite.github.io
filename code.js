@@ -20,6 +20,13 @@ function displayArticles() {
         // Give the article an id so it can be found for searching purposes
         li.id = `article${index + 1}`;
 
+        // Create an anchor tag for the article link
+        const link = document.createElement('a');
+        link.href = article.link;
+        link.target = "_blank"; // Open link in a new tab (optional)
+        link.style.textDecoration = 'none'; 
+        link.style.color = 'inherit';
+
         // Title of the article
         const title = document.createElement('h4');
         title.textContent = article.title;
@@ -68,11 +75,13 @@ function displayArticles() {
         // Add bullet points to the image container so they can be displayed over the image
         imgContainer.appendChild(bulletPointsList);
 
-        // Add elements to the list item
-        li.appendChild(title);
-        li.appendChild(authors);
-        li.appendChild(imgContainer);
-        li.appendChild(citationDiv);
+        link.appendChild(title);
+        link.appendChild(authors);
+        link.appendChild(imgContainer);
+        link.appendChild(citationDiv);
+
+        // Add the link to the list item
+        li.appendChild(link);
 
         // Add the list item to the main articles list
         ul.appendChild(li);
@@ -99,16 +108,17 @@ function search() {
 
     // Search every article in the array
     articles.forEach((article, index) => {
-        // Check to see if the filter appears in the title, author list, or any of the bullet points
+        // Check to see if the filter appears in the title, author list, keywords, or any of the bullet points
         const titleMatches = lookThrough(article.title, filter);
         const authorMatches = article.authors.some(author => lookThrough(author, filter));
         const bulletPointsMatches = article.bulletPoints.some(point => lookThrough(point, filter));
+        const keywordsMatches = article.keywords.some(point => lookThrough(point, filter));
 
         // Match the current article object to it's corresponding place in the list by getting 
         const li = document.getElementById("article" + (index + 1).toString());
 
         // Check if title, any author, or any bullet points matches the filter
-        if (titleMatches || authorMatches || bulletPointsMatches) {
+        if (titleMatches || authorMatches || bulletPointsMatches || keywordsMatches) {
             li.style.display = "";  // Show the article
         } else {
             li.style.display = "none";  // Hide the article
@@ -133,6 +143,18 @@ function sortArticles(filter) {
         articles.sort((a, b) => new Date(a.date) - new Date(b.date));
     } else if (filter == "dateNew") {
         articles.sort((a, b) => new Date(b.date) - new Date(a.date));
+    } else if (filter == "authorA") {
+        articles.sort((a, b) => {
+            const lastNameA = a.authors[0].split(" ").slice(-1)[0];  // Get the last word of the first author
+            const lastNameB = b.authors[0].split(" ").slice(-1)[0];  // Get the last word of the first author
+            return lastNameA.localeCompare(lastNameB);
+        });
+    } else if (filter == "authorZ") {
+        articles.sort((a, b) => {
+            const lastNameA = a.authors[0].split(" ").slice(-1)[0];
+            const lastNameB = b.authors[0].split(" ").slice(-1)[0];
+            return lastNameB.localeCompare(lastNameA);
+        });
     }
 
     displayArticles();

@@ -2,16 +2,18 @@
 // Article class, each article has a title, citation, bullet points of topics in the article, a link to an image, authors, and the year it was published
 class Article {
     /**
-     * @param {string} title
-     * @param {string} citation
-     * @param {string[]} bulletPoints
-     * @param {string} image
-     * @param {string[]} authors
-     * @param {number} year
-     * @param {date} date
+     * @param {string} title // The title
+     * @param {string} citation // The citation
+     * @param {string[]} bulletPoints // Summary of the article that is visible to the user
+     * @param {string} image // An image that will be shown to the users
+     * @param {string[]} authors // The authors
+     * @param {number} year // The year
+     * @param {date} date // The date
+     * @param {string[]} keywords // Keywords that are not visible to the user, but are still searchable
+     * @param {string} link // A Link to the article
      */
 
-    constructor(title, citation, bulletPoints, image, authors, year, date) {
+    constructor(title, citation, bulletPoints, image, authors, year, date, keywords, link) {
         this.title = title;
         this.citation = citation;
         this.bulletPoints = bulletPoints;
@@ -19,6 +21,8 @@ class Article {
         this.authors = authors;
         this.year = year;
         this.date = date;
+        this.keywords = keywords;
+        this.link = link;
     }
 }
 
@@ -34,7 +38,9 @@ class Article {
         "pictures/image.png",
         ["Author 1","Author 2","Author 3","Author 4","Author 5"],
         2024,
-        "YYYY-MM-DD"
+        "YYYY-MM-DD",
+        ["keyword1, "keyword2", "keyword3", "keyword4", "keyword5"],
+        "www.link.com"
     )
 
 */
@@ -47,7 +53,9 @@ const articles = [
         "pictures/depth.png",
         ["Laura Jay W Grove","Jeremiah Blondeau","Sarah L Heidmann","Viktor W Brandtneris","Tyler B Smith", "Lauren K Olinger", "Rosmin S Ennis"],
         2024,
-        "2024-01-03"
+        "2024-01-03",
+        ["Virgin Islands"],
+        "https://doi.org/10.5343/bms.2023.0022"
     ),
     new Article(
         "A quantitative assessment of the status of reef fish communities from a large-scale probability survey in southern Florida",
@@ -56,34 +64,42 @@ const articles = [
         "pictures/probability.png",
         ["Laura Jay W Grove","Jeremiah Blondeau","Steven G Smith", "Jerald S Ault"],
         2024,
-        "2023-09-14"
+        "2023-09-14",
+        ["Florida"],
+        "https://doi.org/10.5343/bms.2023.0020"
     ),
     new Article(
         "Expansion of an established fishery-independent survey into the US Virgin Islands' upper mesophotic zone: feasibility and management implications",
         "Grove, L.J.W., J. Blondeau, D.W. Swanson, S.L. Heidmann, S.G. Smith, M.W. Johnson, V.W. Brandtneris, S.R. Sagarese, & T.B. Smith (2024) Expansion of an established fishery-independent survey into the US Virgin Islandsʼ upper mesophotic zone: feasibility and management implications. Bulletin of Marine Science. 100(2): 113–131. https://doi.org/10.5343/bms.2023.0013",
-        ["Established fishery-independent, diver-based reef fish visual survey to upper mesophotic reefs", "United States Caribbean", "Grouper, snapper, triggerfish, and parrotfish"],
+        ["Established fishery-independent, diver-based reef fish visual survey to upper mesophotic reefs", "Grouper, snapper, triggerfish, and parrotfish"],
         "pictures/hardbottomhabitat.png",
         ["Laura Jay W Grove","Jeremiah Blondeau","Dione W Swanson","Sarah L Heidmann","Steven G Smith","Matthew W Johnson","Viktor W Brandtneris","Skyler R Sagarese","Tyler B Smith"],
         2024,
-        "2023-10-09"
+        "2023-10-09",
+        ["United States Caribbean"],
+        "https://doi.org/10.5343/bms.2023.0013"
     ),
     new Article(
         "Quantifying hurricane impacts on United States Virgin Islands reef fishes using a catchability invariant approach to compare uncalibrated survey indices",
         "Langwiser, C.L., N.R. Vaughan, & L.J.W. Grove (2024) Quantifying hurricane impacts on United States Virgin Islands reef fishes using a catchability invariant approach to compare uncalibrated survey indices. Bulletin of Marine Science. 100(3): 000–000. https://doi.org/10.5343/bms.2023.0011",
-        ["Identify reef fish community impacts following extreme events", "Ecologically important fish species subject to frequent severe weather disturbances", "Caribbean Sea", ],
+        ["Identify reef fish community impacts following extreme events", "Ecologically important fish species subject to frequent severe weather disturbances"],
         "pictures/hurricane.png",
         ["Caitlin Langwiser", "Nathan R Vaughan", "Laura Jay W Grove"],
         2024,
-        "2023-10-05"
+        "2023-10-05",
+        ["Caribbean Sea"],
+        "https://doi.org/10.5343/bms.2023.0011"
     ),
     new Article(
         "A quantitative assessment of the status of benthic communities on US Atlantic coral reefs using a novel standardized approach",
         "Viehman, T.S., S.H. Groves, L.J.W. Grove, S.G. Smith, L. Mudge, C. Donovan, K. Edwards, & E.K. Towle (2024) A quantitative assessment of the status of benthic communities on US Atlantic coral reefs using a novel standardized approach. Bulletin of Marine Science. 100(2): 259–281. https://doi.org/10.5343/bms.2022.0025",
-        ["Data-driven evaluation of the status of corals and benthic communities in US Atlantic coral reef jurisdictions", "Florida, Flower Garden Banks, Puerto Rico, and the US Virgin Islands", "Findings show continued declines for multiple indicators in all regions except Flower Garden Banks", "Stony Coral Tissue Loss Disease"],
+        ["Data-driven evaluation of the status of corals and benthic communities in US Atlantic coral reef jurisdictions", "Findings show continued declines for multiple indicators in all regions except Flower Garden Banks"],
         "pictures/jurisdictions.png",
         ["T Shay Viehman", "Sarah H Groves", "Laura Jay W Grove", "Steven G Smith", "Laura Mudge", "Caroline Donovan", "Kimberly Edwards", "Erica K Towle"],
         2024,
-        "2023-05-09"
+        "2023-05-09",
+        ["Florida, Flower Garden Banks, Puerto Rico, and the US Virgin Islands", "Stony Coral Tissue Loss Disease"],
+        "https://doi.org/10.5343/bms.2022.0025"
     ),
     new Article(
         "Integrating the US Caribbean Reef Fish Visual Census into fishery stock assessments",
@@ -92,16 +108,20 @@ const articles = [
         "pictures/forklength.png",
         ["Jerald S Ault", "Jeremiah Blondeau", "Laura Jay W Grove", "Shannon L Cass-Calay", "Kevin J McCarthy"],
         2024,
-        "2023-11-08"
+        "2023-11-08",
+        [""],
+        "https://doi.org/10.5343/bms.2023.0025"
     ),
     new Article(
         "Distribution and abundance of herbivorous reef fishes on a barrier reef system in the Florida Keys and Dry Tortugas, Florida",
         "Herbig, J.L., J.C. Olsen, J.A. Keller, L.J.W. Grove, C.P. Shea, & A. Acosta (2024) Distribution and abundance of herbivorous reef fishes on a barrier reef system in the Florida Keys and Dry Tortugas. Bulletin of Marine Science. https://doi.org/10.5343/bms.2022.0013",
-        ["Habitat influences spatial patterns of herbivorous fish densities and species richness", "Florida Keys and Dry Tortugas", "Underwater visual surveys", "Herbivore occurrence, density, and species richness increased as percent of low relief hardbottom habitat"],
+        ["Habitat influences spatial patterns of herbivorous fish densities and species richness", "Underwater visual surveys", "Herbivore occurrence, density, and species richness increased as percent of low relief hardbottom habitat"],
         "pictures/herbivore.png",
         ["Jennifer L Herbig", "Jack C Olson", "Jessica A Keller", "Laura Jay W Grove", "Colin P Shea", "Alejandro Acosta"],
         2022,
-        "2022-10-05"
+        "2022-10-05",
+        ["Florida Keys and Dry Tortugas"],
+        "https://doi.org/10.5343/bms.2022.0013"
     ),
     new Article(
         "Low net carbonate accretion characterizes Florida’s coral reef",
@@ -110,7 +130,9 @@ const articles = [
         "pictures/spatial.png",
         ["JohnT. Morris", "Ian C. Enochs", "Nicole Besemer", "T. ShayViehman", "Sarah H.Groves", "Jeremiah Blondeau", "CoryAmes", "Erica K.Towle", "Laura Jay W.Grove", "Derek P. Manzello"],
         2022,
-        "2022-11-15"
+        "2022-11-15",
+        ["Florida"],
+        "https://doi.org/10.1038/s41598-022-23394-4"
     )
 ];
 
