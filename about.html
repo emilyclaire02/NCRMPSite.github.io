@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   
+    <meta name="description" content="Basic HTML5 Document">
+    <meta name="keywords" content="HTML5, Responsive">
+    <link rel="icon" href="pictures/NOAAlogo.png" type="image/png">
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <script type="module" src = "code.js"></script>
+    <title>About Us</title>
+</head>
+
+
+<body>
+
+    <div class="topnav">
+        <a href="./index.html">Home</a>
+        <a href="./publications.html">Publications</a>
+        <a class="active" href="./about.html">About</a>
+    </div>
+
+    <br><br>
+    <h1>About Us</h1>
+
+    <div class="bio">
+        <div class="person">
+            <h2>John Smith</h2>
+            <div class="flip-card">
+                <div class="flip-card-front">
+                    <img src="pictures/profile.webp" alt="man" class="card-image">
+                </div>
+                <div class="flip-card-back">
+                    <p>John is the lead researcher. He loves long walks on the beach.</p>
+                </div>
+            </div>
+        </div>
+        
+
+        <div class="person">
+            <h2>Jane Doe</h2>
+            <div class="flip-card">
+                <div class="flip-card-front">
+                    <img src="pictures/profile.webp" alt="man" class="card-image">
+                </div>
+                <div class="flip-card-back">
+                    <p>Jane is the head of field work. She loves long walks on the beach.</p>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    
+    <script>
+        document.querySelectorAll('.flip-card').forEach(card => {
+            card.addEventListener('click', function() {
+                this.classList.toggle('flipped');
+            });
+        });
+    </script>
+    
+</body>
+</html>
