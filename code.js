@@ -19,6 +19,7 @@ function displayArticles() {
         const li = document.createElement('li');
         // Give the article an id so it can be found for searching purposes
         li.id = `article${index + 1}`;
+        li.classList.add('articleEntry');
 
         // Create an anchor tag for the article link
         const link = document.createElement('a');
@@ -78,10 +79,11 @@ function displayArticles() {
         link.appendChild(title);
         link.appendChild(authors);
         link.appendChild(imgContainer);
-        link.appendChild(citationDiv);
+        //link.appendChild(citationDiv);
 
         // Add the link to the list item
         li.appendChild(link);
+        li.appendChild(citationDiv);
 
         // Add the list item to the main articles list
         ul.appendChild(li);
