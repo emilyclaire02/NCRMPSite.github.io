@@ -99,6 +99,7 @@ function cite(article) {
     const citationText = article.citation;
     // Copy the citation to the clipboard
     navigator.clipboard.writeText(citationText);
+    alert("Citation copied to clipboard");
 }
 
 // Function for searching through the articles

@@ -1,3 +1,5 @@
+/* Baisc style for all pages */
+
 html {
     font-family: Cambria, "Arial Narrow", Calibri, sans-serif;
 }
@@ -6,6 +8,40 @@ body {
     background-color: #E4F0F8;
     color: #00467F;
 }
+
+/* Style for navigation bar */
+
+.topnav {
+    background-color: #0093D0;
+    overflow: hidden;
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+  
+.topnav a {
+    float: left;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+  
+.topnav a:hover {
+    background-color: #59B9E0;
+    color: black;
+}
+  
+.topnav a.active {
+    background-color: #00467F;
+    color: white;
+}
+
+/* Style for the publications page */
 
 .articles {
     align-items: center;     
@@ -97,36 +133,6 @@ body {
     font-size: 16px; 
 }
 
-.topnav {
-    background-color: #0093D0;
-    overflow: hidden;
-    width: 100vw;
-    margin: 0;
-    padding: 0;
-    position: absolute;
-    top: 0;
-    left: 0;
-}
-  
-.topnav a {
-    float: left;
-    color: #f2f2f2;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    font-size: 17px;
-}
-  
-.topnav a:hover {
-    background-color: #59B9E0;
-    color: black;
-}
-  
-.topnav a.active {
-    background-color: #00467F;
-    color: white;
-}
-
 #banner {
     width: 100vw; 
     height: 25vh; 
@@ -137,6 +143,7 @@ body {
     border: none;
 }
 
+/* Style for the about page */
 
 .about-header {
     display: flex;
@@ -149,7 +156,6 @@ body {
     justify-content: space-around; 
     align-items: center;
     flex-wrap: wrap;
-    margin-left: 3vw;
 }
 
 .contact-info {
@@ -164,7 +170,7 @@ body {
 }
 
 .person {
-    width: 25vw;
+    width: 20vw;
     height: auto;
 }
 
@@ -173,8 +179,8 @@ body {
 }
 
 .flip-card {
-    width: 20vw;
-    height: 20vh;
+    width: 15vw;
+    height: 15vh;
     position: relative;
     transition: transform 1.0s;
     transform-style: preserve-3d; 
