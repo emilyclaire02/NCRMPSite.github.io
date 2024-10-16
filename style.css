@@ -1,4 +1,4 @@
-/* Baisc style for all pages */
+/* Basic style for all pages */
 
 html {
     font-family: Cambria, "Arial Narrow", Calibri, sans-serif;
@@ -68,14 +68,17 @@ body {
     width: 29vw;
 }
 
-.articleEntry{
-    height: 50vh;
+
+.articleEntry {
+   height: 50vh; 
+
+   overflow: auto;
 }
 
 .articles img {
-    width: 100%;
     height: auto;
     border-radius: 10px;
+    max-width: 100%;
 }
 
 .img-container {
@@ -142,6 +145,44 @@ body {
     padding: 0;
     border: none;
 }
+
+/* Scaling for small screens */
+@media only screen and (max-width: 800px) {
+    .topnav a {
+        font-size: 14px;
+    }
+
+    #articleList li {
+        width: 60%; 
+    }
+
+    #searchInput {
+        width: 90%;
+    }
+
+    .img-container {
+        width: 100%;
+    }
+
+    #articleList .bullet-points li {
+        width: 100%; 
+    }
+
+    .bio {
+        flex-direction: column;
+        width: 100%; 
+    }
+
+    .flip-card {
+        width: 80vw;
+        height: 25vh;
+    }
+
+    .flip-card-back {
+        font-size: 3vw; 
+    }
+}
+
 
 /* Style for the about page */
 
