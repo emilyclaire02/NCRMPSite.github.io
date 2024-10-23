@@ -9,23 +9,32 @@
     <meta name="keywords" content="HTML5, Responsive">
     <link rel="icon" href="pictures/NOAAlogo.png" type="image/png">
     <link rel="stylesheet" href="style.css" type="text/css">
-    <script type="module" src = "code.js"></script>
-    <title>Home</title>
+    <script type="module" src = "timeline.js"></script>
+    <title>Timeline</title>
 </head>
 
 
 <body>
 
     <div class="topnav">
-        <a class="active" href="./index.html">Home</a>
+        <a href="./index.html">Home</a>
         <a href="./publications.html">Publications</a>
         <a href="./about.html">About</a>
-        <a href="./timeline.html">Timeline</a>
+        <a class="active" href="./timeline.html">Timeline</a>
     </div>
 
-    <br><br>
-    <h1>Home</h1>
-    
-</body>
+    <br><br><br>
 
+    <div id="currentEntryNav-container">
+        <button id="backButton" onclick="previousEntry()"><</button>
+
+        <div id="currentEntry-container"></div>
+    
+        <button id="nextButton" onclick="nextEntry()">></button>
+    </div>
+
+    <div id="timeline-container"></div>
+
+
+</body>
 </html>

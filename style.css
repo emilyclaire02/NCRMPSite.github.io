@@ -206,7 +206,7 @@ body {
 }
 
 .contact-info h3, .contact-info p {
-    margin-top: 0;
+    margin-top: 3vh;
     margin-bottom: 5vh;
 }
 
@@ -250,4 +250,65 @@ body {
 /* When the card is flipped, rotate it */
 .flip-card.flipped {
     transform: rotateY(180deg);
+}
+
+/* Style for the timeline page */
+
+#timeline {
+    display: flex; /* Use Flexbox to align items in a row */
+    flex-wrap: nowrap; /* Wrap items to the next line if they don't fit */
+    justify-content: space-between; /* Optional: Adds space between items */
+    padding: 0;
+    list-style-type: none; /* Remove bullet points */
+    overflow-x: auto;
+}
+
+/* Style for each timeline entry */
+#timeline li.timelineEntry {
+    flex: 0 0 auto; /* Makes each entry take up 20% of the container width */
+    box-sizing: border-box;
+    padding: 10px;
+    margin: 10px;
+    border: 1px solid #ddd; /* Optional: Adds a border around each entry */
+    background-color: #f9f9f9; /* Optional: Background color */
+    text-align: center;
+    width: 300px;
+}
+
+/* Optional: Style for the year heading */
+#timeline li.timelineEntry h2 {
+    margin-bottom: 10px;
+    font-size: 1.5em;
+}
+
+#currentEntryNav-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 auto;
+    width: 80%; /* Control the width of the entire container */
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+#currentEntry-container {
+    flex: 1; /* Takes up the remaining space between the buttons */
+    border: 1px solid #ddd;
+    background-color: #f9f9f9;
+    text-align: center;
+    margin: 0 20px; /* Add margin to separate the buttons */
+}
+
+#backButton, #nextButton {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+#backButton:hover, #nextButton:hover {
+    background-color: #0056b3; /* Darken the button on hover */
 }
