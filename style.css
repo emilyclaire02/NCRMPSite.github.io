@@ -244,7 +244,7 @@ body {
     justify-content: center;
     align-items: center;
     text-align: center;
-    font-size: 2vw; 
+    font-size: 1.2vw; 
 }
 
 /* When the card is flipped, rotate it */
@@ -292,18 +292,27 @@ body {
 }
 
 #currentEntry-container {
+    display: flex;
     flex: 1; /* Takes up the remaining space between the buttons */
     border: 1px solid #ddd;
     background-color: #f9f9f9;
     text-align: center;
+    height: 35vh;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Optional: Add shadow */
+    border-radius: 8px;  
     margin: 0 20px; /* Add margin to separate the buttons */
+    padding: 10px;
+}
+
+#image {
+    border-radius: 8px;  
 }
 
 #backButton, #nextButton {
     padding: 10px 20px;
     font-size: 16px;
     cursor: pointer;
-    background-color: #007bff;
+    background-color: #0093D0;
     color: white;
     border: none;
     border-radius: 5px;
@@ -311,4 +320,262 @@ body {
 
 #backButton:hover, #nextButton:hover {
     background-color: #0056b3; /* Darken the button on hover */
+}
+
+#upper-timeline {
+    height: 40vh;
+    background-color: white;
+    width: 90vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;    
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Optional: Add shadow */
+    border-radius: 8px;      /* Optional: Rounded corners */
+    margin-left: 5vw;
+    margin-right: 5vw;
+}
+
+#years-line ul {
+    list-style-type: none;  /* Remove bullet points */
+    display: flex;          /* Align items in a row */
+    gap: 15px;              /* Optional: Add spacing between items */
+    padding: 0;             /* Remove default padding */
+    margin: 0;              /* Remove default margin */
+}
+
+#years-line li {
+    padding: 5px 10px;         /* Optional: Add padding around each item */
+    cursor: pointer;           /* Optional: Pointer cursor */  
+}
+
+#years-line {
+    display: flex;
+    align-items: flex-end;
+}
+
+#flags-container {
+    display: flex;
+}
+
+.flag {
+    display: flex;            
+    gap: 1px;                
+    align-items: flex-start;
+    margin-left: 5px;
+    position: relative;
+}
+
+.flag-content {
+    display: flex; /* Align the image and text side by side */
+    align-items: center; /* Vertically align image and text */
+    background-color: #E4F0F8;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); 
+    border-radius: 4px;
+    z-index: 2;  
+}
+
+
+.flag-image {
+    width: 40px; 
+    height: 40px;
+    margin-right: 8px;
+}
+
+/* .flag-text {
+    background-color: #E4F0F8;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); 
+    padding: 5px;
+    border-radius: 4px;
+    z-index: 2;       
+} */
+
+.flag-image:hover {
+    width: 100px;
+    height: 100px;
+    margin-right: 8px; 
+    transition: all 0.5s ease; 
+}
+
+
+.vertical-line {
+    width: 1px;                  /* Width of the line */
+    height: 23vh;               /* Height of the line */
+    background-color: #00467F;      /* Color of the line */
+    z-index: 1;  
+}
+
+#flags-container {
+    /* old */
+    /* display: flex;
+    align-items: flex-start; 
+    flex-wrap: nowrap;  */
+
+    /* new */
+    position: relative; 
+    display: flex; 
+    width: max-content;
+    cursor: grab;
+}
+
+#flags-container:active {
+    cursor: grabbing;
+}
+
+.flags {
+    position: absolute;         /* Enable absolute positioning */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 2;  
+    /* align-items: flex-start; */
+}
+
+.flag-content:hover {
+    background-color: #c8dfec;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Optional: Add shadow */
+    padding: 5px;
+    transition: all 0.3s ease; 
+}
+/* 
+#year-2002 {
+    margin-left: 55px
+}
+#line-2002 {
+    margin-top: 18px;    
+    height: 175px          
+}
+
+#year-2004 {
+    margin-left: 160px
+}
+#line-2004 {
+    margin-top: 18px;    
+    height: 175px          
+}
+
+#year-2006 {
+    margin-left: 300px;
+}
+#text-2006 {
+    margin-top: 50px;
+}
+#line-2006 {
+    margin-top: 50px;    
+    height: 144px          
+}
+
+#year-2008 {
+    margin-left: 450px;
+}
+#line-2008 {
+    margin-top: 18px;    
+    height: 175px          
+}
+
+#year-2011 {
+    margin-left: 625px;
+}
+#line-2011 {
+    margin-top: 18px;    
+    height: 175px          
+}
+
+#year-2014-1 {
+    margin-left: 820px;
+}
+#line-2014-1 {
+    margin-top: 18px;    
+    height: 175px              
+}
+
+#year-2014-2 {
+    margin-left: 835px;
+}
+#line-2014-2 {
+    margin-top: 50px;    
+    height: 144px              
+}
+#text-2014-2 {
+    margin-top: 50px;
+}
+
+#year-2018 {
+    margin-left: 1070px;
+}
+#line-2018 {
+    margin-top: 18px;    
+    height: 175px          
+} */
+
+
+#lower-timeline {
+    height: 30vh;
+    width: 90vw;
+    background-color: white;
+    overflow-x: auto;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Optional: Add shadow */
+    border-radius: 8px;      /* Optional: Rounded corners */
+    margin-left: 5vw;
+    margin-right: 5vw;
+}
+
+
+.year-list {
+    position: relative;  
+    margin-top: 30px;    
+}
+
+
+#timeline-wrapper {
+    width: 100%;
+    border: 1px solid #ccc;
+    margin-top: 14vw;
+}
+
+#timeline-container {
+    display: flex;
+    transform-origin: left;
+    transition: transform 0.3s ease;
+}
+
+.timeline-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 20px; /* Default spacing between years */
+    transition: margin 0.3s ease; /* Smooth margin changes */
+}
+
+.flag {
+    transition: margin 0.3s ease; /* Smooth margin changes */
+}
+
+.month {
+    font-size: 0.8rem;
+    /* visibility: hidden;  */
+    
+}
+
+.months {
+    display: none;
+    gap: 10px; /* Optional: add some space between each month */
+}
+
+.label {
+    font-weight: bold;
+}
+
+.details {
+    margin-top: 10px;
+}
+
+.details.months {
+    gap: 10px;
+    margin-top: -10px; /* Adjusts positioning to be closer to the year */
+    margin-left: 40px;
+}
+
+.month {
+    font-size: 0.8em;
+    color: gray;
 }

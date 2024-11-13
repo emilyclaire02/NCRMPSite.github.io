@@ -25,7 +25,11 @@
 
     <br><br><br>
 
-    <div id="currentEntryNav-container">
+    <!-- <button id="zoom-in">Zoom In</button>
+    <button id="zoom-out">Zoom Out</button> -->
+
+
+    <div id="upper-timeline">
         <button id="backButton" onclick="previousEntry()"><</button>
 
         <div id="currentEntry-container"></div>
@@ -33,8 +37,88 @@
         <button id="nextButton" onclick="nextEntry()">></button>
     </div>
 
-    <div id="timeline-container"></div>
+    <!-- <div id="timeline-container"></div> -->
 
+    <div id="">
+
+    </div>
+
+    <br>
+
+    <div id="lower-timeline">
+        <div id="flags-container">
+            <!-- <div class="flags" id="year-2002">
+                <div class="flag">
+                    <div class="vertical-line" id="line-2002"></div>
+                    <p class="flag-text" onclick="setEntry(0)">I was born</p>
+                </div>
+            </div>
+            <div class="flags" id="year-2004">
+                <div class="flag">
+                    <div class="vertical-line" id="line-2004"></div>
+                    <p class="flag-text" onclick="setEntry(1)">I became a big sister</p>
+                </div>
+            </div>
+            <div class="flags" id="year-2006">
+                <div class="flag">
+                    <div class="vertical-line" id="line-2006"></div>
+                    <p class="flag-text" id="text-2006" onclick="setEntry(2)">I became an even bigger sister</p>
+                </div>
+            </div>
+            <div class="flags" id="year-2008">
+                <div class="flag">
+                    <div class="vertical-line" id="line-2008"></div>
+                    <p class="flag-text" onclick="setEntry(3)">I started kindergarden</p>
+                </div>
+            </div>
+            <div class="flags" id="year-2011">
+                <div class="flag">
+                    <div class="vertical-line" id="line-2008"></div>
+                    <p class="flag-text" onclick="setEntry(4)">I competed in my first pageant</p>
+                </div>
+            </div>
+            <div class="flags" id="year-2014-1">
+                <div class="flag">
+                    <div class="vertical-line" id="line-2014-1"></div>
+                    <p class="flag-text" onclick="setEntry(5)">I won my first NAM state title</p>
+                </div>
+            </div>
+            <div class="flags" id="year-2014-2">
+                <div class="flag">
+                    <div class="vertical-line" id="line-2014-2"></div>
+                    <p class="flag-text" id="text-2014-2" onclick="setEntry(6)">I got top 10 at NAM nationals</p>
+                </div>
+            </div>
+            <div class="flags" id="year-2018">
+                <div class="flag">
+                    <div class="vertical-line" id="line-2018"></div>
+                    <p class="flag-text" id="text-2018" onclick="setEntry(7)">I moved to Maryland</p>
+                </div>
+            </div> -->
+        </div>
+       
+
+        <div id="timeline-wrapper">
+            <div id="timeline-container">
+                
+                <div class="timeline-item year" data-year="2004">
+                    <div class="label">2004</div>
+                    <div class="details months">
+                        <div class="month">January</div>
+                        <div class="month">February</div>
+                        <div class="month">March</div>
+                        <div class="month">April</div>
+                        <div class="month">May</div>
+                        <div class="month">June</div>
+                        <div class="month">July</div>
+                        <div class="month">August</div>
+                        <div class="month">September</div>
+                    </div>
+                </div>
+                <!-- Add more years as needed -->
+            </div>
+        </div>
+    </div>
 
 </body>
 </html>
