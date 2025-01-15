@@ -26,7 +26,7 @@ Timeline of Events: An interactive timeline highlighting significant events, mil
 
 1. Prerequisites:
 - This project uses HTML, CSS, and JavaScript
-2. Steps:
+2. Steps:  
 /# Clone the repository  
 gh repo clone emilyclaire02/NCRMPSite.github.io
 
@@ -116,6 +116,7 @@ Adding a new entry to the timeline can be done in two ways, manually inputting a
 ##### Manual Input:
 
 First ensure that in window.onload = function() the function "initializeTimeline()" is commented out.
+Edit the "firstYear" and "finalYear" variables with the first and last years that the timeline will extend to.
 To add an entry to the timeline, create a new TimelineEntry object in the timeline array using this template.
 
 Template:
@@ -131,8 +132,10 @@ new TimelineEntry(
 
 ##### TSV Input:
 
-First ensure that in window.onload = function() the function "initializeTimeline()" is called.
+First ensure that in window.onload = function() the function "initializeTimeline()" is called. Comment out anything in the "timeline" array.
+Sort the "Timeline" Google Sheets by date from oldest to newest event. 
 Download the "Timeline" Google Sheets and name it "timelineInput.tsv".
 Download all the media from the "media" folder in the Google Drive and put it in the "timelineMedia" folder.
+Edit the "firstYear" and "finalYear" variables with the first and last years that the timeline will extend to.
 
 The initializeTimeline() function will then take every line of the spreadsheet and create a new timelineEntry to add to the timeline array.

@@ -1,6 +1,8 @@
 
 let currentEntry = null;
 let currentEntryIndex = 0;
+let firstYear = 2002;
+let finalYear = 2024;
 
 // implement scrolling
 document.addEventListener('DOMContentLoaded', () => {
@@ -270,6 +272,7 @@ window.onload = function () {
                 currentEntryIndex = 0;
                 showCurrentEntry();
                 buildTimeline();
+                buildYears();
             } else {
                 console.error("Timeline is empty. Check the TSV file or initialization process.");
             }
@@ -365,6 +368,38 @@ function setEntry(entryIndex) {
     showCurrentEntry();
 }
 
+function buildYears() {
+    function createSpacer(width, flexGrow) {
+        const spacerDiv = document.createElement('div');
+        spacerDiv.classList.add('spacer', 'year-spacer');
+        if (width) {
+            spacerDiv.style.width = width;
+        }
+        if (flexGrow) {
+            spacerDiv.style.flexGrow = flexGrow;
+        }
+        return spacerDiv;
+    }
+
+    // Get the container from the HTML document
+    const yearsTimeline = document.getElementById('years-timeline');
+
+    // Clear the existing content
+    yearsTimeline.innerHTML = '';
+
+    yearsTimeline.appendChild(createSpacer('26px', null));
+
+    for (let i = firstYear; i <= finalYear; i++) {
+        yearsTimeline.appendChild(createYear(i));
+
+        if (i < finalYear) {
+            yearsTimeline.appendChild(createSpacer(null, '1'));
+        }
+    }
+
+    yearsTimeline.appendChild(createSpacer('26px', null));
+}
+
 
 function buildTimeline() {
     // Get the container from the HTML document
@@ -380,6 +415,7 @@ function buildTimeline() {
         if (flexGrow) spacer.style.flexGrow = flexGrow;
         return spacer;
     }
+    
 
     calculateAllSpaces();
 
@@ -468,9 +504,14 @@ function buildTimeline() {
     eventsTimeline.appendChild(createSpacer("26px"));
 }
 
-function calculateAllSpaces() {
-    let finalYear = 2024;
+function createYear(year) {
+    const yearDiv = document.createElement('div');
+    yearDiv.classList.add('year');
+    yearDiv.textContent = year;
+    return yearDiv;
+}
 
+function calculateAllSpaces() {
     let previousDate = timeline[0]; // Start from the timeline's start date
     timeline.forEach((event, index) => {
 
