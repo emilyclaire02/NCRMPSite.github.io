@@ -2,13 +2,13 @@
 
 ## Table of Contents
 
-1. [Link Text](#about-the-project)
-2. [Link Text](#key-features)
-3. [Link Text](#installation)
-4. [Link Text](#usage)
-- [Link Text](#publications)
-- [Link Text](#about-us)
-- [Link Text](#timeline)
+1. [About the Project](#about-the-project)
+2. [Key Features](#key-features)
+3. [Installation](#installation)
+4. [Usage](#usage)
+    - [Publications](#publications)
+    - [About Us](#about-us)
+    - [Timeline](#timeline)
 
 ## About the Project
 
@@ -27,11 +27,11 @@ Timeline of Events: An interactive timeline highlighting significant events, mil
 1. Prerequisites:
 - This project uses HTML, CSS, and JavaScript
 2. Steps:
-- /# Clone the repository  
-- gh repo clone emilyclaire02/NCRMPSite.github.io
+/# Clone the repository  
+gh repo clone emilyclaire02/NCRMPSite.github.io
 
-- /# Navigate to the project directory  
-- cd NCRMPSite
+/# Navigate to the project directory  
+cd NCRMPSite
 
 ## Usage
 
@@ -41,15 +41,15 @@ The JavaScript function, displayArticles() in code.js, dynamically generates HTM
 
 The Articles class in article.js contains a constructor with all the elements needed to display a publication. The parameters are: 
 
-title: The title of the publication
-citation: The citation
-bulletPoints: As ummary of the article that is visible to the user
-image: An image that will be shown to the users. Put these images in the "pictures" folder".
-authors: The authors
-year: The year the publication was published
-date: The date the publicaition was published
-keywords: Keywords that are not visible to the user, but are still searchable
-link: A Link to the article
+title: The title of the publication  
+citation: The citation  
+bulletPoints: As ummary of the article that is visible to the user  
+image: An image that will be shown to the users. Put these images in the "pictures" folder".  
+authors: The authors  
+year: The year the publication was published  
+date: The date the publicaition was published  
+keywords: Keywords that are not visible to the user, but are still searchable  
+link: A Link to the article  
 
 #### Adding a New Publication
 
@@ -57,17 +57,17 @@ To add an article to the page, create a new Article object in the articles array
 
 Template:
 
-new Article(
-    "Title",
-    "Citation",
-    ["Bullet Point 1", "Bullet Point 2", "Bullet Point 3", "Bullet point 4"],
-    "pictures/image.png",
-    ["Author 1","Author 2","Author 3","Author 4","Author 5"],
-    2024,
-    "YYYY-MM-DD",
-    ["keyword1, "keyword2", "keyword3", "keyword4", "keyword5"],
-    "www.link.com"
-)
+new Article(  
+    "Title",  
+    "Citation",  
+    ["Bullet Point 1", "Bullet Point 2", "Bullet Point 3", "Bullet point 4"],  
+    "pictures/image.png",  
+    ["Author 1","Author 2","Author 3","Author 4","Author 5"],  
+    2024,  
+    "YYYY-MM-DD",  
+    ["keyword1, "keyword2", "keyword3", "keyword4", "keyword5"],  
+    "www.link.com"  
+)  
 
 ### About Us
 
@@ -101,13 +101,13 @@ The JavaScript function, buildTimeline() in code.js, dynamically generates HTML 
 
 The TimelineEntry class in timeline.js contains a constructor with all the elements needed to display a new flag on the timeline. The parameters are: 
 
-preview: A short overview. Essentially the title of the event.
-description: A long description describing what occured.
-mediaType: An indication of the type of media the entry will be using. Available types: Image/video. This is used when creating the media to ensure the correct element is created.
-media: Some sort of media. If it is an image, the name of an image that can be found in timelineMedia is provided. If it is a video, a YouTube video link is provided. 
-icon: A small icon to be displayed on the event flag. To use the image associated with the event, input "image". To use a different image, input the name of an image that can be found in timelineMedia. If an icon will not be used, input "none".
-date: The date the event occured in "DD-MM-YYYY" format.
-spacer: The space between flags. This is dynamically calculated.
+preview: A short overview. Essentially the title of the event.  
+description: A long description describing what occured.  
+mediaType: An indication of the type of media the entry will be using. Available types: Image/video. This is used when creating the media to ensure the correct element is created.  
+media: Some sort of media. If it is an image, the name of an image that can be found in timelineMedia is provided. If it is a video, a YouTube video link is provided.  
+icon: A small icon to be displayed on the event flag. To use the image associated with the event, input "image". To use a different image, input the name of an image that can be found in timelineMedia. If an icon will not be used, input "none".  
+date: The date the event occured in "DD-MM-YYYY" format.  
+spacer: The space between flags. This is dynamically calculated.  
 
 #### Adding a New Timeline Entry
 
@@ -120,14 +120,14 @@ To add an entry to the timeline, create a new TimelineEntry object in the timeli
 
 Template:
 
-new TimelineEntry(
-    "Preview",
-    "Description",
-    "image",
-    "timelineMedia/image.jpg",
-    "image",
-    "MM-DD-YYYY"
-)
+new TimelineEntry(  
+    "Preview",  
+    "Description",  
+    "image",  
+    "timelineMedia/image.jpg",  
+    "image",  
+    "MM-DD-YYYY"  
+)  
 
 ##### TSV Input:
 
