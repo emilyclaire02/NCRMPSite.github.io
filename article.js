@@ -13,6 +13,7 @@ class Article {
      * @param {string} link // A Link to the article
      */
 
+
     constructor(title, citation, bulletPoints, image, authors, year, date, keywords, link) {
         this.title = title;
         this.citation = citation;

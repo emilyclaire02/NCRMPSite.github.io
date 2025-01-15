@@ -8,7 +8,7 @@
     <meta name="description" content="Basic HTML5 Document">
     <meta name="keywords" content="HTML5, Responsive">
     <link rel="icon" href="pictures/NOAAlogo.png" type="image/png">
-    <link rel="stylesheet" href="style.css" type="text/css">
+    <link rel="stylesheet" href="timelineStyle.css" type="text/css">
     <script type="module" src = "timeline.js"></script>
     <title>Timeline</title>
 </head>
@@ -21,13 +21,11 @@
         <a href="./publications.html">Publications</a>
         <a href="./about.html">About</a>
         <a class="active" href="./timeline.html">Timeline</a>
+        <a href="./glossy.html">Glossy</a>
     </div>
 
-    <br><br><br>
-
-    <!-- <button id="zoom-in">Zoom In</button>
-    <button id="zoom-out">Zoom Out</button> -->
-
+    <br><br>
+    <h1>Timeline</h1>
 
     <div id="upper-timeline">
         <button id="backButton" onclick="previousEntry()"><</button>
@@ -37,88 +35,169 @@
         <button id="nextButton" onclick="nextEntry()">></button>
     </div>
 
-    <!-- <div id="timeline-container"></div> -->
-
-    <div id="">
-
-    </div>
-
     <br>
 
     <div id="lower-timeline">
         <div id="flags-container">
-            <!-- <div class="flags" id="year-2002">
-                <div class="flag">
-                    <div class="vertical-line" id="line-2002"></div>
-                    <p class="flag-text" onclick="setEntry(0)">I was born</p>
-                </div>
-            </div>
-            <div class="flags" id="year-2004">
-                <div class="flag">
-                    <div class="vertical-line" id="line-2004"></div>
-                    <p class="flag-text" onclick="setEntry(1)">I became a big sister</p>
-                </div>
-            </div>
-            <div class="flags" id="year-2006">
-                <div class="flag">
-                    <div class="vertical-line" id="line-2006"></div>
-                    <p class="flag-text" id="text-2006" onclick="setEntry(2)">I became an even bigger sister</p>
-                </div>
-            </div>
-            <div class="flags" id="year-2008">
-                <div class="flag">
-                    <div class="vertical-line" id="line-2008"></div>
-                    <p class="flag-text" onclick="setEntry(3)">I started kindergarden</p>
-                </div>
-            </div>
-            <div class="flags" id="year-2011">
-                <div class="flag">
-                    <div class="vertical-line" id="line-2008"></div>
-                    <p class="flag-text" onclick="setEntry(4)">I competed in my first pageant</p>
-                </div>
-            </div>
-            <div class="flags" id="year-2014-1">
-                <div class="flag">
-                    <div class="vertical-line" id="line-2014-1"></div>
-                    <p class="flag-text" onclick="setEntry(5)">I won my first NAM state title</p>
-                </div>
-            </div>
-            <div class="flags" id="year-2014-2">
-                <div class="flag">
-                    <div class="vertical-line" id="line-2014-2"></div>
-                    <p class="flag-text" id="text-2014-2" onclick="setEntry(6)">I got top 10 at NAM nationals</p>
-                </div>
-            </div>
-            <div class="flags" id="year-2018">
-                <div class="flag">
-                    <div class="vertical-line" id="line-2018"></div>
-                    <p class="flag-text" id="text-2018" onclick="setEntry(7)">I moved to Maryland</p>
-                </div>
-            </div> -->
-        </div>
-       
-
-        <div id="timeline-wrapper">
-            <div id="timeline-container">
-                
-                <div class="timeline-item year" data-year="2004">
-                    <div class="label">2004</div>
-                    <div class="details months">
-                        <div class="month">January</div>
-                        <div class="month">February</div>
-                        <div class="month">March</div>
-                        <div class="month">April</div>
-                        <div class="month">May</div>
-                        <div class="month">June</div>
-                        <div class="month">July</div>
-                        <div class="month">August</div>
-                        <div class="month">September</div>
+            <div class="scrollable" id="scrollable">
+                <div class="timeline zoomable" id="events-timeline">
+                    <div class="spacer entry-spacer" style="width: 26px;"></div>
+                    <div class="event" id="entry-0">
+                        <div class="flag">
+                            <div class="vertical-line"></div>
+                            <div class="flag-content" onclick="setEntry(0)">
+                                <p class="flag-text">I was born</p>
+                            </div>
+                        </div>
                     </div>
+                    <div class="spacer entry-spacer" style="flex-grow: 2;"></div>
+                    <div class="event" id="entry-1">
+                        <div class="flag">
+                            <div class="vertical-line"></div>
+                            <div class="flag-content" onclick="setEntry(1)">
+                                <img src="timelineMedia/brobo.JPG" alt="flag icon" class="flag-image">
+                                <p class="flag-text">I became a big sister</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="spacer entry-spacer" style="flex-grow: 2;"></div>
+                    <div class="event" id="entry-2">
+                        <div class="flag">
+                            <div class="vertical-line"></div>
+                            <div class="flag-content" onclick="setEntry(2)">
+                                <p class="flag-text">I became an even bigger sister</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="spacer entry-spacer" style="flex-grow: 2;"></div>
+                    <div class="event" id="entry-3">
+                        <div class="flag">
+                            <div class="vertical-line"></div>
+                            <div class="flag-content" onclick="setEntry(3)">
+                                <img src="timelineMedia/firstday.JPG" alt="flag icon" class="flag-image">
+                                <p class="flag-text">I started kindergarden</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="spacer entry-spacer" style="flex-grow: 3;"></div>
+                    <div class="event" id="entry-4">
+                        <div class="flag">
+                            <div class="vertical-line"></div>
+                            <div class="flag-content" onclick="setEntry(4)">
+                                <img src="timelineMedia/crown.png" alt="flag icon" class="flag-image">
+                                <p class="flag-text">I competed in my first pageant</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="spacer entry-spacer" style="flex-grow: 2;"></div>
+                    <div class="event" id="entry-5">
+                        <div class="flag">
+                            <div class="vertical-line"></div>
+                            <div class="flag-content" onclick="setEntry(5)">
+                                <img src="timelineMedia/crown.png" alt="flag icon" class="flag-image">
+                                <p class="flag-text">I competed in my first NAM national pageant</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="spacer entry-spacer" style="flex-grow: 1;"></div>
+                    <div class="event" id="entry-6">
+                        <div class="flag">
+                            <div class="vertical-line"></div>
+                            <div class="flag-content" onclick="setEntry(6)">
+                                <img src="timelineMedia/crown.png" alt="flag icon" class="flag-image">
+                                <p class="flag-text">I won my first NAM state title</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="spacer entry-spacer" style="flex-grow: .5;"></div>
+                    <div class="event" id="entry-7">
+                        <div class="flag">
+                            <div class="vertical-line"></div>
+                            <div class="flag-content" id="top10" onclick="setEntry(7)">
+                                <img src="timelineMedia/crown.png" alt="flag icon" class="flag-image">
+                                <p class="flag-text">I got top 10 at NAM nationals</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="spacer entry-spacer" style="flex-grow: 4;"></div>
+                    <div class="event" id="entry-8">
+                        <div class="flag">
+                            <div class="vertical-line"></div>
+                            <div class="flag-content" onclick="setEntry(8)">
+                                <p class="flag-text">I moved to Maryland</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="spacer entry-spacer" style="flex-grow: 5.5;"></div>
+                    <div class="hidden">
+                    </div>
+                    <div class="spacer entry-spacer" style="width: 26px;"></div>
                 </div>
-                <!-- Add more years as needed -->
-            </div>
+                
+            
+                <div class="timeline zoomable" id="years-timeline">
+                    <div class="spacer year-spacer" style="width: 26px;"></div>
+                    <div class="year">2002</div>
+                    <div class="spacer year-spacer" style="flex-grow: 1;"></div>
+                    <div class="year">2003</div>
+                    <div class="spacer year-spacer" style="flex-grow: 1;"></div>
+                    <div class="year">2004</div>
+                    <div class="spacer year-spacer" style="flex-grow: 1;"></div>
+                    <div class="year">2005</div>
+                    <div class="spacer year-spacer" style="flex-grow: 1;"></div>
+                    <div class="year">2006</div>
+                    <div class="spacer year-spacer" style="flex-grow: 1;"></div>
+                    <div class="year">2007</div>
+                    <div class="spacer year-spacer" style="flex-grow: 1;"></div>
+                    <div class="year">2008</div>
+                    <div class="spacer year-spacer" style="flex-grow: 1;"></div>
+                    <div class="year">2009</div>
+                    <div class="spacer year-spacer" style="flex-grow: 1;"></div>
+                    <div class="year">2010</div>
+                    <div class="spacer year-spacer" style="flex-grow: 1;"></div>
+                    <div class="year">2011</div>
+                    <div class="spacer year-spacer" style="flex-grow: 1;"></div>
+                    <div class="year">2012</div>
+                    <div class="spacer year-spacer" style="flex-grow: 1;"></div>
+                    <div class="year">2013</div>
+                    <div class="spacer year-spacer" style="flex-grow: 1;"></div>
+                    <div class="year">2014</div>
+                    <div class="spacer year-spacer" style="flex-grow: 1;"></div>
+                    <div class="year">2015</div>
+                    <div class="spacer year-spacer" style="flex-grow: 1;"></div>
+                    <div class="year">2016</div>
+                    <div class="spacer year-spacer" style="flex-grow: 1;"></div>
+                    <div class="year">2017</div>
+                    <div class="spacer year-spacer" style="flex-grow: 1;"></div>
+                    <div class="year">2018</div>
+                    <div class="spacer year-spacer" style="flex-grow: 1;"></div>
+                    <div class="year">2019</div>
+                    <div class="spacer year-spacer" style="flex-grow: 1;"></div>
+                    <div class="year">2020</div>
+                    <div class="spacer year-spacer" style="flex-grow: 1;"></div>
+                    <div class="year">2021</div>
+                    <div class="spacer year-spacer" style="flex-grow: 1;"></div>
+                    <div class="year">2022</div>
+                    <div class="spacer year-spacer" style="flex-grow: 1;"></div>
+                    <div class="year">2023</div>
+                    <div class="spacer year-spacer" style="flex-grow: 1;"></div>
+                    <div class="year">2024</div>
+                    <div class="spacer year-spacer" style="width: 26px;"></div>
+                </div>
         </div>
+        </div>
+    
+
     </div>
 
+
+<!-- 
+    <div class="scrollable">
+        <div class="flags-container">
+
+        </div>
+    </div> -->
+    
 </body>
+
 </html>

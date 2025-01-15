@@ -369,10 +369,13 @@ body {
     display: flex; /* Align the image and text side by side */
     align-items: center; /* Vertically align image and text */
     background-color: #E4F0F8;
+    width: 200px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); 
     border-radius: 4px;
     z-index: 2;  
 }
+
+
 
 
 .flag-image {
@@ -435,8 +438,9 @@ body {
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Optional: Add shadow */
     padding: 5px;
     transition: all 0.3s ease; 
+    z-index: 100;
 }
-/* 
+
 #year-2002 {
     margin-left: 55px
 }
@@ -505,7 +509,7 @@ body {
 #line-2018 {
     margin-top: 18px;    
     height: 175px          
-} */
+}
 
 
 #lower-timeline {
@@ -517,6 +521,10 @@ body {
     border-radius: 8px;      /* Optional: Rounded corners */
     margin-left: 5vw;
     margin-right: 5vw;
+    background-image: url(timelineMedia/background.png);
+    background-repeat: no-repeat;
+    background-size: 500% auto;
+    transition: background-size 0.3s ease, background-position 0.3s ease; /* Smooth zoom and scroll */
 }
 
 
@@ -536,6 +544,10 @@ body {
     display: flex;
     transform-origin: left;
     transition: transform 0.3s ease;
+    background-color: rgba(255, 255, 255, 0.647);
+    width: max-content; /* Ensures it expands to fit content */
+    min-width: 100%; 
+    overflow-x: auto;
 }
 
 .timeline-item {
@@ -579,3 +591,45 @@ body {
     font-size: 0.8em;
     color: gray;
 }
+
+.timeline-spacer {
+    flex-grow: 1;
+    background-color: transparent; /* Optional */
+    display: inline-block; /* Keeps it inline with the timeline */
+}
+
+
+/* Glossy Page */
+
+/* Container with flexbox */
+#glossy-list {
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    gap: 20px; /* Add spacing between images */
+    justify-content: flex-end;
+    margin: 60px;
+
+}
+
+/* Align one image to the right */
+.flex-container img:last-child {
+    margin-left: auto; /* Push the last image to the right */
+}
+
+/* Target the images using their class */
+.glossy-picture {
+    width: 600px; /* Set the width */
+    height: auto; /* Maintain aspect ratio */
+    margin: 10px; /* Optional: Add spacing between images */
+}
+
+.right {
+    margin-left: auto; /* Push the last image to the right */
+}
+
+.image-link {
+    display: flex; /* Enable flexbox inside the anchor tag */
+    justify-content: flex-start; /* Align images by default to the left */
+}
+
+#map { height: 600px; }

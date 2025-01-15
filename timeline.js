@@ -1,14 +1,295 @@
+
 let currentEntry = null;
 let currentEntryIndex = 0;
-const startYear = 2002; // The first year on the timeline
-let zoomLevel = 1; // Starting zoom level
-const zoomStep = 0.1; // Amount to zoom in or out
-const maxZoomToShowMonths = 1.5; // Zoom level to show months
-const minSpacing = 20; // Minimum spacing between years
-const maxSpacing = 500; // Maximum spacing when fully zoomed in
-const timelineContainer = document.getElementById("lower-timeline");
 
-// A function to display the current point in the timeline in greater detail
+// implement scrolling
+document.addEventListener('DOMContentLoaded', () => {
+
+    let mouseDown = false;
+  
+    let initialGrabPosition = 0;
+    let initialScrollPosition = 0;
+  
+    const scrollableElement = document.querySelector('.scrollable');
+   
+    scrollableElement.addEventListener('mousedown', (mouseEvent) => {
+      mouseDown = true;
+      scrollableElement.style.cursor = 'grabbing';
+      initialGrabPosition = mouseEvent.clientX;
+      initialScrollPosition = scrollableElement.scrollLeft;
+    });
+
+    const updateBackgroundPosition = () => {
+        const scrollPosition = scrollableElement.scrollLeft;
+        scrollableElement.style.backgroundPosition = `${-scrollPosition}px center`;
+    };
+  
+    scrollableElement.addEventListener('mouseup', () => {
+      mouseDown = false;
+      scrollableElement.style.cursor = 'grab';
+    });
+  
+    scrollableElement.addEventListener('mousemove', (mouseEvent) => {
+      if (mouseDown) {
+        const mouseMovementDistance = mouseEvent.clientX - initialGrabPosition;
+        scrollableElement.scrollLeft = initialScrollPosition - mouseMovementDistance;
+        updateBackgroundPosition();
+    }
+    });
+  });
+
+  // implement zooming
+
+  document.addEventListener('DOMContentLoaded', () => {
+
+    const zoomableElement = document.querySelector('.zoomable');
+    const containerElement = document.querySelector('.scrollable');
+  
+    let scale = 1;
+  
+    let mouseHasMoved = true;
+    let mousePositionRelative;
+    let elementUnderMouse;
+  
+    zoomableElement.addEventListener('mousemove', () => {
+      mouseHasMoved = true
+    });
+  
+    zoomableElement.addEventListener('wheel', (wheelEvent) => {
+      if (isVerticalScrolling(wheelEvent)) {
+        wheelEvent.preventDefault();
+  
+        scale = computeScale(scale, wheelEvent.deltaY);
+        zoomableElement.style.width = scale * 100 + '%';
+  
+        if (mouseHasMoved) {
+          elementUnderMouse = findElementUnderMouse(wheelEvent.clientX);
+          mousePositionRelative = (wheelEvent.clientX - getLeft(elementUnderMouse)) / getWidth(elementUnderMouse);
+          mouseHasMoved = false;
+        }
+  
+        const mousePosition = wheelEvent.clientX;
+        const elementUnderMouseLeft = getLeft(elementUnderMouse);
+        const zoomableLeft = getLeft(zoomableElement);
+        const containerLeft = getLeft(containerElement);
+        const moveAfterZoom = getWidth(elementUnderMouse) * mousePositionRelative;
+  
+        containerElement.scrollLeft = Math.round(elementUnderMouseLeft - zoomableLeft - mousePosition + containerLeft + moveAfterZoom);
+      }
+    });
+  
+    const isVerticalScrolling = (wheelEvent) => {
+        const deltaX = Math.abs(wheelEvent.deltaX);
+        const deltaY = Math.abs(wheelEvent.deltaY);
+        return deltaY > deltaX;
+    };
+
+    const computeScale = (currentScale, wheelDelta) => {
+        const newScale = currentScale - wheelDelta * 0.005;
+        return Math.max(1, newScale);  // Ensure scale does not go below 1
+    };
+
+    const findElementUnderMouse = (mousePosition) => {
+        const children = zoomableElement.children;
+
+        for (const childElement of children) {
+            const childRect = childElement.getBoundingClientRect();
+            
+            if (childRect.left <= mousePosition && childRect.right >= mousePosition) {
+                return childElement;
+            }
+        }
+
+        return zoomableElement;
+    };
+
+    const getLeft = (element) => element.getBoundingClientRect().left;
+    const getWidth = (element) => element.getBoundingClientRect().width;
+  });
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const eventsTimeline = document.getElementById('events-timeline');
+    const yearsTimeline = document.getElementById('years-timeline');
+    const containerElement = document.querySelector('.scrollable');
+
+    let scale = 1;
+
+    const synchronizeZoomAndScroll = () => {
+        yearsTimeline.style.width = eventsTimeline.style.width;
+        yearsTimeline.scrollLeft = eventsTimeline.scrollLeft;
+    };
+
+    eventsTimeline.addEventListener('wheel', (wheelEvent) => {
+        if (Math.abs(wheelEvent.deltaY) > Math.abs(wheelEvent.deltaX)) {
+            wheelEvent.preventDefault();
+            scale = Math.max(1, scale - wheelEvent.deltaY * 0.005);
+            eventsTimeline.style.width = scale * 100 + '%';
+            synchronizeZoomAndScroll();
+        }
+    });
+
+    containerElement.addEventListener('scroll', () => {
+        yearsTimeline.scrollLeft = containerElement.scrollLeft;
+    });
+
+    let mouseDown = false;
+    let initialGrabPosition = 0;
+    let initialScrollPosition = 0;
+
+    containerElement.addEventListener('mousedown', (mouseEvent) => {
+        mouseDown = true;
+        containerElement.style.cursor = 'grabbing';
+        initialGrabPosition = mouseEvent.clientX;
+        initialScrollPosition = containerElement.scrollLeft;
+    });
+
+    containerElement.addEventListener('mouseup', () => {
+        mouseDown = false;
+        containerElement.style.cursor = 'grab';
+    });
+
+    containerElement.addEventListener('mousemove', (mouseEvent) => {
+        if (mouseDown) {
+            const movement = mouseEvent.clientX - initialGrabPosition;
+            containerElement.scrollLeft = initialScrollPosition - movement;
+            synchronizeZoomAndScroll();
+        }
+    });
+});
+
+class TimelineEntry {
+    /**
+     * @param {string} preview // A short overview
+     * @param {string} description // A long description
+     * @param {string} mediaType // Some sort of media. Image, video, audio, etc.
+     * @param {string} media // Some sort of media. Image, video, audio, etc.
+     * @param {string} icon // An icon to be displayed 
+     * @param {string} date // The full date in "dd-mm-yyyy" format
+     * @param {float} spacer // space between flags
+     */
+
+    constructor(preview, description, mediaType, media, icon, date, spacer) {
+        this.preview = preview;
+        this.description = description;
+        this.mediaType = mediaType;
+        this.media = media;
+        this.icon = icon;
+        this.date = date;
+        this.spacer = null;
+    }
+}
+
+const timeline = [
+    // new TimelineEntry(
+    //     "I was born",
+    //     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    //     "image",
+    //     "timelineMedia/threedayoldemily.JPG",
+    //     "none",
+    //     "09-30-2002"
+    // ),
+
+    // new TimelineEntry(
+    //     "I became a big sister",
+    //     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    //     "image",
+    //     "timelineMedia/brobo.JPG",
+    //     "image",
+    //     "04-06-2004"
+    // ),
+
+    // new TimelineEntry(
+    //     "I became an even bigger sister",
+    //     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    //     "image",
+    //     "timelineMedia/elliotborn.JPG",
+    //     "none.png",
+    //     "05-13-2006"
+    // ),
+
+    // new TimelineEntry(
+    //     "I started kindergarden",
+    //     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    //     "image",
+    //     "timelineMedia/firstday.JPG",
+    //     "image",
+    //     "08-29-2008"
+    // ),
+
+    // new TimelineEntry(
+    //     "I competed in my first pageant",
+    //     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    //     "image",
+    //     "timelineMedia/firstpageant.jpg",
+    //     "crown.png",
+    //     "06-26-2011"
+    // ),
+
+    // new TimelineEntry(
+    //     "I competed in my first NAM national pageant",
+    //     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    //     "video",
+    //     "https://www.youtube.com/embed/D0kreEtq6bg?si=CSF3tdGYEgxSBopS",
+    //     "crown.png",
+    //     "11-28-2013"
+    // ),
+
+    // new TimelineEntry(
+    //     "I won my first NAM state title",
+    //     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    //     "image",
+    //     "timelineMedia/preteen.jpg",
+    //     "crown",
+    //     "07-15-2014"
+    // ), 
+
+    // new TimelineEntry(
+    //     "I got top 10 at NAM nationals",
+    //     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    //     "image",
+    //     "timelineMedia/top10.JPG",
+    //     "crown",
+    //     "11-22-2014"
+    // ), 
+
+    // new TimelineEntry(
+    //     "I moved to Maryland",
+    //     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    //     "image",
+    //     "timelineMedia/moving.jpg",
+    //     "none",
+    //     "06-04-2018"
+    // )
+]
+
+window.onload = function () {
+    initializeTimeline()
+        .then(() => {
+            if (timeline.length > 0) {
+                currentEntry = timeline[0];
+                currentEntryIndex = 0;
+                showCurrentEntry();
+                buildTimeline();
+            } else {
+                console.error("Timeline is empty. Check the TSV file or initialization process.");
+            }
+        })
+        .catch(error => {
+            console.error("Error initializing timeline:", error);
+        });
+};
+
+
+async function initializeTimeline() {
+    try {
+        await loadTSVToTimeline('./timelineInput.tsv'); // Wait for TSV to load
+        console.log("Timeline initialized successfully.");
+    } catch (error) {
+        console.error("Failed to initialize timeline:", error);
+    }
+}
+
+
 function showCurrentEntry() {
     // Get the container from the HTML document
     const entryContainer = document.getElementById('currentEntry-container');
@@ -19,7 +300,6 @@ function showCurrentEntry() {
     // Create the media
 
     let media = null;
-
 
     if(currentEntry.mediaType == "image") {
         media = document.createElement('img');
@@ -59,138 +339,12 @@ function showCurrentEntry() {
     entryContainer.appendChild(textContainer)
 }
 
-
-
-// function positionFlags() {
-//     const flagsContainer = document.getElementById('flags-container');
-
-//     // Clear any existing flags before re-positioning them
-//     flagsContainer.innerHTML = '';
-
-//     const containerOffsetLeft = flagsContainer.offsetLeft;
-
-//     timeline.forEach((entry, index) => {
-//         // Find the timeline item that matches the entry's year
-//         const yearItem = document.querySelector(`.timeline-item[data-year="${entry.year}"]`);
-
-//         if (yearItem) {
-//             // Calculate the offset position of the timeline item relative to the container
-//             const yearRelativeLeft = yearItem.offsetLeft - containerOffsetLeft;
-//             const yearWidth = yearItem.offsetWidth;
-
-//             // Create a flag element for each entry
-//             const flagElement = document.createElement('div');
-//             flagElement.className = 'flag';
-//             flagElement.setAttribute('data-year', entry.year);
-
-//             // Set the flag position directly over the center of the year marker
-//             flagElement.style.position = 'absolute';
-//             flagElement.style.left = `${yearRelativeLeft + (yearWidth / 2)}px`;
-
-//             // Set flag content
-//             const contentWrapper = document.createElement('div');
-//             contentWrapper.className = 'flag-content';
-//             contentWrapper.onclick = () => setEntry(index);
-
-//             const lineElement = document.createElement('div');
-//             lineElement.className = 'vertical-line';
-//             flagElement.appendChild(lineElement);
-
-//             let imageElement = null;
-//             if (entry.icon !== "none") {
-//                 imageElement = document.createElement('img');
-//                 imageElement.src = entry.icon === "image" ? entry.media : `timelineMedia/${entry.icon}.png`;
-//                 imageElement.alt = 'flag icon';
-//                 imageElement.className = 'flag-image';
-//             }
-
-//             const textElement = document.createElement('p');
-//             textElement.className = 'flag-text';
-//             textElement.textContent = entry.preview;
-
-//             // Append the image and text to the content wrapper
-//             if (imageElement) {
-//                 contentWrapper.appendChild(imageElement);
-//             }
-//             contentWrapper.appendChild(textElement);
-//             flagElement.appendChild(contentWrapper);
-
-//             // Append flag to the flags container
-//             flagsContainer.appendChild(flagElement);
-//         }
-//     });
-// }
-
-
-
-// function positionFlags() {
-//     const flagsContainer = document.getElementById('flags-container');
-
-//     // Clear any existing flags before re-positioning them
-//     flagsContainer.innerHTML = '';
-
-//     const containerOffsetLeft = flagsContainer.offsetLeft;
-
-//     timeline.forEach((entry, index) => {
-//         // Find the timeline item that matches the entry's year
-//         const yearItem = document.querySelector(`.timeline-item[data-year="${entry.year}"]`);
-
-//         if (yearItem) {
-//             // Calculate the offset position of the timeline item relative to the container
-//             const yearRelativeLeft = yearItem.offsetLeft - containerOffsetLeft;
-//             const yearWidth = yearItem.offsetWidth;
-
-//             // Create a flag element for each entry
-//             const flagElement = document.createElement('div');
-//             flagElement.className = 'flag';
-//             flagElement.setAttribute('data-year', entry.year);
-
-//             // Set the flag position directly over the center of the year marker
-//             flagElement.style.position = 'absolute';
-//             flagElement.style.left = `${yearRelativeLeft + (yearWidth / 2)}px`;
-
-//             // Set flag content
-//             const contentWrapper = document.createElement('div');
-//             contentWrapper.className = 'flag-content';
-//             contentWrapper.onclick = () => setEntry(index);
-
-//             const lineElement = document.createElement('div');
-//             lineElement.className = 'vertical-line';
-//             flagElement.appendChild(lineElement);
-
-//             let imageElement = null;
-//             if (entry.icon !== "none") {
-//                 imageElement = document.createElement('img');
-//                 imageElement.src = entry.icon === "image" ? entry.media : `timelineMedia/${entry.icon}.png`;
-//                 imageElement.alt = 'flag icon';
-//                 imageElement.className = 'flag-image';
-//             }
-
-//             const textElement = document.createElement('p');
-//             textElement.className = 'flag-text';
-//             textElement.textContent = entry.preview;
-
-//             // Append the image and text to the content wrapper
-//             if (imageElement) {
-//                 contentWrapper.appendChild(imageElement);
-//             }
-//             contentWrapper.appendChild(textElement);
-//             flagElement.appendChild(contentWrapper);
-
-//             // Append flag to the flags container
-//             flagsContainer.appendChild(flagElement);
-//         }
-//     });
-// }
-
-
-
-
 function previousEntry() {
     if (currentEntryIndex > 0) {
         currentEntryIndex--;
         currentEntry = timeline[currentEntryIndex];
         showCurrentEntry();
+        syncLowerTimelineToEntry();
     }
 }
 
@@ -199,6 +353,7 @@ function nextEntry() {
         currentEntryIndex++;  // Move forward one entry
         currentEntry = timeline[currentEntryIndex];
         showCurrentEntry();
+        syncLowerTimelineToEntry();
     }
 }
 
@@ -210,405 +365,222 @@ function setEntry(entryIndex) {
     showCurrentEntry();
 }
 
-// A function to show the timeline entries
+
 function buildTimeline() {
     // Get the container from the HTML document
-    const years = document.getElementById('timeline-container');
+    const eventsTimeline = document.getElementById('events-timeline');
 
     // Clear the existing content
-    years.innerHTML = '';
+    eventsTimeline.innerHTML = '';
 
-    const minYear = 2002;
-    const maxYear = 2024;
-
-    for(let i = minYear; i <= maxYear; i++) { // Use <= to include maxYear
-        const timelineItem = document.createElement('div');
-        timelineItem.className = "timeline-item";
-        timelineItem.dataset.year = i;
-
-        const label = document.createElement('div');
-        label.className = "label";
-        label.textContent = i;
-
-        const details = document.createElement('div');
-        details.className = "details months";
-
-        const months = [
-            "January", "February", "March", "April", "May", "June",
-            "July", "August", "September", "October", "November", "December"
-        ];
-
-        months.forEach(month => {
-            const monthDiv = document.createElement('div');
-            monthDiv.className = "month";
-            monthDiv.textContent = month;
-            details.appendChild(monthDiv);
-        });
-
-        label.appendChild(details);
-        timelineItem.appendChild(label);
-        years.appendChild(timelineItem);
-    }
-}
-
-function addLines() {
-    const flagsContainer = document.getElementById('flags-container');
-    const timelineItems = document.querySelectorAll('.timeline-item'); // Each year item with class 'timeline-item'
-
-    // Clear any existing lines
-    flagsContainer.innerHTML = '';
-
-    // Get the position of the flags container to calculate relative positions
-    const containerOffsetLeft = flagsContainer.offsetLeft;
-
-    timeline.forEach((entry, index) => {
-        // Find the timeline item that matches the entry's year
-        const yearItem = document.querySelector(`.timeline-item[data-year="${entry.year}"]`);
-
-        if (yearItem) {
-            // Calculate the offset relative to the flags container
-            const yearRelativeLeft = yearItem.offsetLeft - containerOffsetLeft;
-            const yearWidth = yearItem.offsetWidth;
-
-            // Create the line element
-            const lineElement = document.createElement('div');
-            lineElement.className = 'vertical-line'; // Add a class for styling
-
-            // Style the line to be positioned relative to the container
-            lineElement.style.position = 'relative';
-            lineElement.style.left = `${index === 0 ? yearRelativeLeft : yearRelativeLeft + (yearWidth / 2)}px`;
-
-            // Append the line to the flags container
-            flagsContainer.appendChild(lineElement);
-        }
-    });
-}
-
-
-
-function zoomTimeline(isZoomingIn) {
-    
-    zoomLevel += isZoomingIn ? zoomStep : -zoomStep;
-    zoomLevel = Math.max(1, zoomLevel); // Ensure zoom level doesn't go below 1
-
-    const timelineContainer = document.getElementById('timeline-container');
-    const timelineItems = document.querySelectorAll('.timeline-item');
-    const flagItems = document.querySelectorAll('.flag');
-    const months = document.querySelectorAll('.months');
-
-    // Adjust spacing and month visibility based on zoom level
-    let spacing = minSpacing + (zoomLevel - 1) * (maxSpacing - minSpacing);
-    spacing = Math.min(spacing, maxSpacing);
-
-    // Apply new spacing to timeline items
-    timelineItems.forEach(item => {
-        item.style.margin = `0 ${spacing}px`;
-    });
-
-    const flagsContainer = document.getElementById('flags-container');
-    console.log(flagsContainer);
-    const containerOffsetLeft = flagsContainer.offsetLeft;
-    //const yearElement = document.querySelector(`[data-year="${entry.year}"]`);
-
-
-    // Apply new spacing to flags
-    // flagItems.forEach(item => {
-    //     const yearItem = document.querySelector(`.timeline-item[data-year="${item.year}"]`);
-    //     const yearRelativeLeft = yearItem.offsetLeft - containerOffsetLeft;
-    //     const yearWidth = yearItem.offsetWidth;
-
-    //     item.style.position = 'absolute';
-    //     item.style.left = `${yearRelativeLeft + (yearWidth / 2)}px`;
-        
-        
-    // });
-
-    flagItems.forEach(item => {
-        // Get the 'year' associated with the 'item' by accessing the 'data-year' attribute
-        const year = item.getAttribute('data-year');
-        
-        // Find the corresponding year element in the timeline (based on the value of 'year')
-        const yearItem = document.querySelector(`.timeline-item[data-year="${year}"]`);
-        
-        // If the yearItem is found, calculate its position
-        if (yearItem) {
-            const yearRelativeLeft = yearItem.offsetLeft - containerOffsetLeft;
-            const yearWidth = yearItem.offsetWidth;
-    
-            // Position the flag element based on the year item's position
-            item.style.position = 'absolute';
-            item.style.left = `${yearRelativeLeft + (yearWidth / 2)}px`;
-        }
-
-        //item.style.margin = `0 ${spacing}px`;
-    });
-
-    flagItems.forEach(item => {
-        // Get the 'year' associated with the 'item' by accessing the 'data-year' attribute
-        const year = item.getAttribute('data-year');
-        
-        // Find the corresponding year element in the timeline (based on the value of 'year')
-        const yearItem = document.querySelector(`.timeline-item[data-year="${year}"]`);
-        
-        // If the yearItem is found, calculate its position
-        if (yearItem) {
-            const yearRelativeLeft = yearItem.offsetLeft - containerOffsetLeft;
-            const yearWidth = yearItem.offsetWidth;
-    
-            // Position the flag element based on the year item's position
-            item.style.position = 'absolute';
-            item.style.left = `${yearRelativeLeft + (yearWidth / 2)}px`;
-        }
-
-        item.style.margin = `0 ${spacing}px`;
-    });
-    
-
-
-    // Show months if zoom level is high enough
-    if (zoomLevel >= maxZoomToShowMonths) {
-        months.forEach(month => {
-            //month.style.display = 'flex';
-        });
-    } else {
-        months.forEach(month => {
-            month.style.display = 'none';
-        });
+    function createSpacer(width, flexGrow) {
+        const spacer = document.createElement("div");
+        spacer.className = "spacer entry-spacer";
+        if (width) spacer.style.width = width;
+        if (flexGrow) spacer.style.flexGrow = flexGrow;
+        return spacer;
     }
 
-    // After zooming, reposition the flags
+    calculateAllSpaces();
 
+    eventsTimeline.appendChild(createSpacer("70px"));
 
-}
+    const yearEventCount = {};
 
-function positionFlags() {
-    console.log("position")
-    const flagsContainer = document.getElementById('flags-container');
-    
-    // Clear any existing flags before re-positioning them
-    flagsContainer.innerHTML = '';
-
-    const containerOffsetLeft = flagsContainer.offsetLeft;
-
-    // Reposition flags with respect to zoom level
-    timeline.forEach((entry, index) => {
-        const yearItem = document.querySelector(`.timeline-item[data-year="${entry.year}"]`);
-
-        if (yearItem) {
-            const yearRelativeLeft = yearItem.offsetLeft - containerOffsetLeft;
-            const yearWidth = yearItem.offsetWidth;
-
-            // Create a flag element for each entry
-            const flagElement = document.createElement('div');
-            flagElement.className = 'flag';
-            flagElement.setAttribute('data-year', entry.year);
-
-            // Set the flag position above the timeline item
-            flagElement.style.position = 'absolute';
-            flagElement.style.left = `${yearRelativeLeft + (yearWidth / 2)}px`;
-
-            // Create the content inside the flag
-            const contentWrapper = document.createElement('div');
-            contentWrapper.className = 'flag-content';
-            contentWrapper.onclick = () => setEntry(index);
-
-            const lineElement = document.createElement('div');
-            lineElement.className = 'vertical-line';
-            flagElement.appendChild(lineElement);
-
-            let imageElement = null;
-            if (entry.icon !== "none") {
-                imageElement = document.createElement('img');
-                imageElement.src = entry.icon === "image" ? entry.media : `timelineMedia/${entry.icon}.png`;
-                imageElement.alt = 'flag icon';
-                imageElement.className = 'flag-image';
-            }
-
-            const textElement = document.createElement('p');
-            textElement.className = 'flag-text';
-            textElement.textContent = entry.preview;
-
-            if (imageElement) {
-                contentWrapper.appendChild(imageElement);
-            }
-            contentWrapper.appendChild(textElement);
-            flagElement.appendChild(contentWrapper);
-
-            // Append flag to the flags container
-            flagsContainer.appendChild(flagElement);
+    // Count events by year
+    timeline.forEach((event) => {
+        const eventYear = event.date.split("-")[2]; // Get year from the event's date
+        if (!yearEventCount[eventYear]) {
+            yearEventCount[eventYear] = 0;
         }
+        yearEventCount[eventYear]++;
     });
+
+    timeline.forEach((event, index) => {
+        // Event container
+        const eventDiv = document.createElement("div");
+        eventDiv.className = "event";
+        eventDiv.id = `entry-${event.index}`;
+
+        // Flag container
+        const flag = document.createElement("div");
+        flag.className = "flag";
+
+        // Vertical line
+        const verticalLine = document.createElement("div");
+        verticalLine.className = "vertical-line";
+
+        // Flag content
+        const flagContent = document.createElement("div");
+        flagContent.className = "flag-content";
+        flagContent.setAttribute("onclick", `setEntry(${index})`);
+        if (event.specialId) flagContent.id = event.specialId;
+
+        // Add text and image
+        if (event.icon !== "none") {
+            const img = document.createElement("img");
+            img.src = event.icon === "image" ? event.media : `timelineMedia/${event.icon}`;
+            img.alt = "flag icon";
+            img.className = "flag-image";
+            flagContent.appendChild(img);
+        }
+        const flagText = document.createElement("p");
+        flagText.className = "flag-text";
+        flagText.textContent = event.preview;
+
+        // Calculate the margin-top for multiple events in the same year
+        const eventYear = event.date.split("-")[2];
+        const yearCount = yearEventCount[eventYear]; // Get the count for that year
+        let marginTop = 0;
+
+        // Adjust margin-top based on how many events are in the year
+        if (yearCount > 1) {
+            // Get the index of this event in the timeline for that specific year
+            const indexInYear = timeline.filter(e => e.date.split("-")[2] === eventYear).indexOf(event);
+            marginTop = (100 / yearCount) * indexInYear; // Increase margin-top for each event in the same year
+        }
+        
+        flagContent.style.marginTop = `${marginTop}px`;
+
+        flagContent.appendChild(flagText);
+
+        // Assemble flag
+        flag.appendChild(verticalLine);
+        flag.appendChild(flagContent);
+
+        // Assemble event
+        eventDiv.appendChild(flag);
+
+        // Add event and spacer to timeline
+        eventsTimeline.appendChild(eventDiv);
+
+        // Add spacer after each event
+        //const spacerFlexGrow = index === 0 ? "2" : (index === timeline.length - 1 ? "5.5" : "2");
+        const spacerFlexGrow = event.spacer;
+        //console.log(event.preview + ": " + spacerFlexGrow);
+        eventsTimeline.appendChild(createSpacer(null, spacerFlexGrow));
+    });
+
+    // Add hidden div and closing spacer
+    const hidden = document.createElement("div");
+    hidden.className = "hidden";
+    eventsTimeline.appendChild(hidden);
+    eventsTimeline.appendChild(createSpacer("26px"));
 }
 
+function calculateAllSpaces() {
+    let finalYear = 2024;
 
+    let previousDate = timeline[0]; // Start from the timeline's start date
+    timeline.forEach((event, index) => {
 
-// Event listeners for zooming with buttons
-// document.getElementById("zoom-in").addEventListener("click", () => zoomTimeline(true));
-// document.getElementById("zoom-out").addEventListener("click", () => zoomTimeline(false));
+        let [currMonth, , currYear] = event.date.split("-");
+        let adjustedCurrYear = parseInt(currYear) + (parseInt(currMonth) * 0.1);
+        //let adjustedCurrYear = event.year + (event.date.split("-")[0] * .1);
+        let [prevMonth, , prevYear] = previousDate.date.split("-");
+        let adjustedPrevYear = parseInt(prevYear) + (parseInt(prevMonth) * 0.1);
 
-function zoomTimelineOnScroll(event) {
-    // Prevent default behavior of scrolling (prevent page scrolling)
-    event.preventDefault();
+        //console.log(adjustedCurrYear + " " + adjustedPrevYear);
 
-    // Determine if we're zooming in or out based on the wheel direction
-    const zoomIn = event.deltaY < 0; // Scroll up to zoom in
-    console.log(zoomLevel);
+        let spacerFlexGrow = (adjustedCurrYear - adjustedPrevYear);
 
-    if(zoomLevel == 1) {
-        positionFlags();
-        if(zoomIn) {
-            zoomLevel += .1;
+        previousDate.spacer = spacerFlexGrow;
+
+        if (index === timeline.length - 1) {
+            event.spacer = finalYear - adjustedCurrYear; // Set spacer for last event to 5.5
         } else {
-            zoomLevel -= .1;
+            event.spacer = spacerFlexGrow; // Otherwise, calculate spacer normally
         }
-    } else {
-        zoomTimeline(zoomIn); 
-    }
-    
+
+        // Update previousDate for the next iteration
+        previousDate = event;
+    });
 }
 
+function countYear(year) {
+    return timeline.filter(entry => entry.year === year).length;
+}
 
-timelineContainer.addEventListener('wheel', zoomTimelineOnScroll);
-
-
-// When the page is loaded
-window.onload = function() {
-    currentEntry = timeline[0];
-    currentEntryIndex = 0;
-    showCurrentEntry();
-    buildTimeline();
-    //addLines();
-    positionFlags();
-};
 
 // Make the functions available in the global scope
 window.previousEntry = previousEntry;
 window.nextEntry = nextEntry;
 window.setEntry = setEntry;
 
-class TimelineEntry {
-    /**
-     * @param {int} year // The year
-     * @param {string} preview // A short overview
-     * @param {string} description // A long description
-     * @param {string} mediaType // Some sort of media. Image, video, audio, etc.
-     * @param {string} media // Some sort of media. Image, video, audio, etc.
-     * @param {string} icon // An icon to be displayed 
-     */
+function syncLowerTimelineToEntry() {
+    const eventsTimeline = document.querySelector('#events-timeline');
+    const events = eventsTimeline.querySelectorAll('.event');
+    
+    // Find the corresponding year item for the current entry
+    const currentEvent = Array.from(events).find(item => item.id === `entry-${timeline.indexOf(currentEntry) }`);
+    
+    // getting the year and going to the year instead of the flag
+    
+    // console.log(timeline.indexOf(currentEntry));
+    // console.log(currentEvent.id);
+    // console.log(currentEvent);
 
-    constructor(year, preview, description, mediaType, media, icon) {
-        this.year = year;
-        this.preview = preview;
-        this.description = description;
-        this.mediaType = mediaType;
-        this.media = media;
-        this.icon = icon;
+    if (currentEvent) {
+        // Scroll the lower timeline so the entry's year is in view
+        currentEvent.scrollIntoView({
+            behavior: 'smooth',
+            block: 'center', // Center the year in the view
+        });
     }
 }
 
-const timeline = [
-    new TimelineEntry(
-        2002,
-        "I was born",
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-        "image",
-        "timelineMedia/threedayoldemily.JPG",
-        "none"
-    ),
+async function loadTSVToTimeline(tsvFilePath) {
+    try {
+        // Fetch the TSV file
+        const response = await fetch(tsvFilePath);
+        if (!response.ok) {
+            throw new Error(`Failed to load file: ${response.statusText}`);
+        }
 
-    new TimelineEntry(
-        2004,
-        "I became a big sister",
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-        "image",
-        "timelineMedia/brobo.JPG",
-        "image"
-    ),
+        const data = await response.text();
+        // Split the file into rows
+        const rows = data.trim().split('\n');
 
-    new TimelineEntry(
-        2006,
-        "I became an even bigger sister",
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-        "image",
-        "timelineMedia/elliotborn.JPG",
-        "none"
-    ),
+        // Extract headers from the second row (index 1)
+        //const headers = rows[1].split('\t');
 
-    new TimelineEntry(
-        2008,
-        "I started kindergarden",
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-        "image",
-        "timelineMedia/firstday.JPG",
-        "image"
-    ),
+        const headers = rows[1].split('\t').map(header => header.trim().replace(/\r$/, ''));
+        console.log("Headers:", headers);
 
-    new TimelineEntry(
-        2011,
-        "I competed in my first pageant",
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-        "image",
-        "timelineMedia/firstpageant.jpg",
-        "crown"
-    ),
 
-    new TimelineEntry(
-        2013,
-        "I competed in my first NAM national pageant",
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-        "video",
-        "https://www.youtube.com/embed/D0kreEtq6bg?si=CSF3tdGYEgxSBopS",
-        "crown"
-    ),
+        // Skip the first two rows (metadata and headers) and process remaining rows
+        const dataRows = rows.slice(2);
 
-    new TimelineEntry(
-        2014,
-        "I won my first NAM state title",
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-        "image",
-        "timelineMedia/preteen.jpg",
-        "crown"
-    ), 
+        // Process each data row
+        dataRows.forEach(row => {
+            const values = row.split('\t'); // Split by tab
+            const entryData = {};
 
-    new TimelineEntry(
-        2018,
-        "I moved to Maryland",
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-        "image",
-        "timelineMedia/moving.jpg",
-        "none"
-    )
-]
+            // Map headers to values
+            headers.forEach((header, index) => {
+                entryData[header] = values[index];
+            });
 
-let isDragging = false;
-let startX;
-let scrollLeft;
+            if (entryData.mediaType === "image") {
+                entryData.media = "timelineMedia/" + entryData.media;
+            }
 
-// Mouse down event - start dragging
-timelineContainer.addEventListener("mousedown", (e) => {
-    isDragging = true;
-    startX = e.pageX - timelineContainer.offsetLeft;
-    scrollLeft = timelineContainer.scrollLeft;
-    timelineContainer.style.cursor = "grabbing";
-});
+            // Create a TimelineEntry and add it to the timeline
+            const entry = new TimelineEntry(
+                entryData.preview || null,
+                entryData.description || null,
+                entryData.mediaType || null,
+                entryData.media || null,
+                entryData.icon || "none",
+                entryData.date || null
+            );
 
-// Mouse move event - drag to scroll
-timelineContainer.addEventListener("mousemove", (e) => {
-    if (!isDragging) return; // Only run if the mouse is down
-    e.preventDefault();
-    const x = e.pageX - timelineContainer.offsetLeft;
-    const walk = (x - startX) * 2; // Multiplier to increase scroll speed
-    timelineContainer.scrollLeft = scrollLeft - walk;
-});
+            timeline.push(entry);
+        });
 
-// Mouse up event - stop dragging
-timelineContainer.addEventListener("mouseup", () => {
-    isDragging = false;
-    timelineContainer.style.cursor = "grab";
-});
-
-// Mouse leave event - stop dragging if mouse leaves container
-timelineContainer.addEventListener("mouseleave", () => {
-    isDragging = false;
-    timelineContainer.style.cursor = "grab";
-});
+        console.log("Timeline successfully loaded from TSV file:", timeline);
+    } catch (error) {
+        console.error("Error loading TSV file:", error);
+        throw error; // Rethrow to notify the caller of failure
+    }
+}

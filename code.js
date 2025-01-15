@@ -181,3 +181,21 @@ window.onload = function() {
         sortArticles(selectedValue);
     });
 };
+
+var map = L.map('map').setView([24, -77], 5);
+L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+}).addTo(map);
+
+var puertoRico = L.marker([18.2, -66.5]).addTo(map);
+puertoRico.bindPopup("<a href='https://www.coris.noaa.gov/monitoring/status_report/docs/PR_508_compliant.pdf' target='_blank' class='image-link'><b>Puerto Rico</b><a>");
+
+var florida = L.marker([27.6, -81.5]).addTo(map);
+florida.bindPopup("<a href='https://www.coris.noaa.gov/monitoring/status_report/docs/FL_508_compliant.pdf' target='_blank' class='image-link'><b>Florida</b><a>");
+
+var flowerGardens = L.marker([27, -93]).addTo(map);
+flowerGardens.bindPopup("<a href='https://www.coris.noaa.gov/monitoring/status_report/docs/FGB_508_compliant.pdf' target='_blank' class='image-link'><b>Florida</b><a>");
+
+var virginIslands = L.marker([18.35, -64.9]).addTo(map);
+virginIslands.bindPopup("<a href='https://www.coris.noaa.gov/monitoring/status_report/docs/USVI_508_compliant.pdf' target='_blank' class='image-link'><b>Florida</b><a>");

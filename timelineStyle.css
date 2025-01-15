@@ -1,0 +1,220 @@
+/* Basic style for all pages */
+
+html {
+    font-family: Cambria, "Arial Narrow", Calibri, sans-serif;
+}
+
+body {
+    background-color: #E4F0F8;
+    color: #00467F;
+}
+
+/* Style for navigation bar */
+
+.topnav {
+    background-color: #0093D0;
+    overflow: hidden;
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+  
+.topnav a {
+    float: left;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+  
+.topnav a:hover {
+    background-color: #59B9E0;
+    color: black;
+}
+  
+.topnav a.active {
+    background-color: #00467F;
+    color: white;
+}
+
+/* timeline style */
+
+  .scrollable {
+    overflow-x: hidden;
+    width: 100%;
+    cursor: grab;
+    height: 250px;
+    background-image: url(timelineMedia/background.png);
+    transition: all 0.3s ease; 
+  }
+  
+  .timeline {
+    display: flex;
+    flex-direction: row;
+    align-items:center;
+    transition: all 0.3s ease; 
+  }
+  
+  /* .event {
+    width: 26px;
+    height: 26px;
+    border-radius: 100%;
+    background-color: rgb(0, 127, 255);
+  } */
+  
+  /* .spacer {
+    height: 6px;
+    background-color: rgba(0, 127, 255, 0.5);
+  } */
+
+  #years-timeline {
+    height: 50px; /* Shorter height for years timeline */
+  }
+
+   #events-timeline {
+      height: 199px;  
+}
+
+.year {
+    font-size: 18px;
+    color: #00467F;
+    text-align: center;
+    line-height: 25px;
+    font-weight: bold;
+    background-color: rgba(255, 255, 255, 0.647);
+}
+
+.year:hover {
+    font-weight: bold;
+    color: #00467F;
+}
+
+#lower-timeline {
+    height: 30vh;
+    width: 90vw;
+    background-color: white;
+    overflow-x: auto;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Optional: Add shadow */
+    border-radius: 8px;      /* Optional: Rounded corners */
+    margin-left: 5vw;
+    margin-right: 5vw;
+    transition: background-size 0.3s ease, background-position 0.3s ease; /* Smooth zoom and scroll */
+}
+
+#upper-timeline {
+    height: 40vh;
+    background-color: white;
+    width: 90vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;    
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Optional: Add shadow */
+    border-radius: 8px;      /* Optional: Rounded corners */
+    margin-left: 5vw;
+    margin-right: 5vw;
+}
+
+#backButton, #nextButton {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #0093D0;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+#backButton:hover, #nextButton:hover {
+    background-color: #0056b3; /* Darken the button on hover */
+}
+
+#currentEntry-container {
+    display: flex;
+    flex: 1; /* Takes up the remaining space between the buttons */
+    border: 1px solid #ddd;
+    background-color: #f9f9f9;
+    text-align: center;
+    height: 35vh;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Optional: Add shadow */
+    border-radius: 8px;  
+    margin: 0 20px; /* Add margin to separate the buttons */
+    padding: 10px;
+}
+
+.year-spacer {
+    height: 25px;
+    background-color: rgba(255, 255, 255, 0.647);
+}
+
+/* .vertical-line {
+    width: 1px;                  
+    height: 23vh;               
+    background-color: #00467F;   
+    z-index: 1;  
+} */
+
+.vertical-line {
+    width: 1px;
+    height: 15vh;
+    background-color: #00467F;
+    position: absolute;
+    top: 0; /* Align the vertical line with the top of the flag */
+    left: 50%; /* Center the vertical line horizontally */
+    z-index: 1;
+}
+
+
+.flag-content {
+    position: absolute; /* Position the content above the vertical line */
+    top: -50px; /* Adjust this value to position the content vertically above the line */
+    left: 0; /* Align content with the vertical line's left side */
+    display: flex;
+    align-items: center;
+    background-color: #E4F0F8;
+    width: 200px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); 
+    border-radius: 4px;
+    z-index: 2;
+    border-color: #00467F;
+    border-width: 1px;
+    border-style: solid;
+}
+
+#top10 {
+    margin-top: 70px; /* Adjust the value to move it further down */
+}
+
+.flag-content:hover {
+    background-color: #c8dfec;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Optional: Add shadow */
+    padding: 5px;
+    transition: all 0.3s ease; 
+    z-index: 100;
+    
+}
+
+.flag-image {
+    width: 40px; 
+    height: 40px;
+    margin-right: 8px;
+}
+
+.flag-image:hover {
+    width: 100px;
+    height: 100px;
+    margin-right: 8px; 
+    transition: all 0.5s ease; 
+}
+
+.flag {
+    position: relative; /* This makes flag-content position relative to the flag */
+    transition: margin 0.3s ease; /* Smooth margin changes */
+}
+
+.zoomable {
+    transition: transform 0.3s ease;
+}
