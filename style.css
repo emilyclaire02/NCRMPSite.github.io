@@ -618,9 +618,19 @@ body {
 
 /* Target the images using their class */
 .glossy-picture {
-    width: 600px; /* Set the width */
+    width: 800px; /* Set the width */
     height: auto; /* Maintain aspect ratio */
     margin: 10px; /* Optional: Add spacing between images */
+    display: block;
+    margin: 0 auto;
+    border-radius: 4px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    transition: width 0.5s ease-in-out, height 0.5s ease-in-out;
+}
+
+.glossy-picture:hover {
+    width: 850px;
+    height: auto;
 }
 
 .right {
@@ -632,4 +642,108 @@ body {
     justify-content: flex-start; /* Align images by default to the left */
 }
 
-#map { height: 600px; }
+#map { height: 400px; }
+
+.hidden {
+    display: none;
+}
+
+#florida_images {
+    display: hidden;  
+    justify-content: space-around;
+    gap: 20px;  
+    transition: display 4s;
+}
+
+#flowergarden_images {
+    display: hidden;  
+    justify-content: space-around;
+    gap: 20px;  
+    transition: display 4s;
+}
+
+#puertorico_images {
+    display: hidden;  
+    justify-content: space-around;
+    gap: 20px;  
+    transition: display 4s;
+}
+
+#virginislands_images {
+    display: hidden;  
+    justify-content: space-around;
+    gap: 20px;  
+    transition: display 4s;
+}
+
+.reportMedia {
+    height: 400px;
+    width: auto;
+}
+
+.report-section {
+    display: flex;
+    flex-direction: column;  /* Stack the h2 title and the report content vertically */
+    align-items: center;  /* Center the items horizontally */
+    width: 45%;  /* Adjust the width of each report section */
+}
+
+.reports {
+    display: flex;
+    overflow-x: auto; /* Enables horizontal scrolling */
+    white-space: nowrap; /* Prevents images from wrapping */
+    padding-bottom: 10px; /* Prevents scrollbar from covering images */
+    scroll-snap-type: x mandatory; /* Smooth scrolling effect */
+    gap: 20px;
+    width: 100%;  /* Adjust width to control the size of each report section */
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+h1 {
+    text-align: center;
+}
+
+h3 {
+    text-align: center;
+}
+p {
+    text-align: center;
+    background-color: #eff4f7;
+    padding: 10px;
+    border-radius: 4px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#map {
+    background-color: #eff4f7;
+    padding: 10px;
+    border: white;
+    border-radius: 4px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.status {
+    display: flex;
+    justify-content: center;  
+    align-items: center;     
+    height: 100%;            
+    width: 100%;        
+}
+
+#national_images {
+    display: hidden;
+    justify-content: center;  /* Centers vertically */
+}
+
+/* #flowergarden_status {
+    display: flex;
+    justify-content: center;  
+    align-items: center;     
+    height: 100%;            
+    width: 100%;            
+} */
+

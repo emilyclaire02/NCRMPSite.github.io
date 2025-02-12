@@ -1,8 +1,9 @@
 // Get the articles array from the articles class
-import { articles } from './article.js';
+import { articles, initializeArticlesArray } from './article.js';
 
 // A function to show the articles
 function displayArticles() {
+
     // Get the container from the html document
     const articlesContainer = document.getElementById('articles-container');
 
@@ -36,11 +37,12 @@ function displayArticles() {
         const authors = document.createElement('h5');
         const articleAuthors = article.authors
         var authorsText = ""
+        let [currYear, , currdate] = article.date.split("-");
         // Limit the authors shown to 3
         if(articleAuthors.length <= 3) {
-            authorsText = articleAuthors.toString() + ", (" + article.year + ")"
+            authorsText = articleAuthors.toString() + ", (" + currYear + ")"
         }  else {
-            authorsText = articleAuthors[0] + ", " + articleAuthors[1]+ ", " + articleAuthors[2] + " et al., (" + article.year + ")"
+            authorsText = articleAuthors[0] + ", " + articleAuthors[1]+ ", " + articleAuthors[2] + " et al., (" + currYear + ")"
         }
         authors.textContent = authorsText;
 
@@ -72,6 +74,7 @@ function displayArticles() {
             entry.textContent = point;
             bulletPointsList.appendChild(entry);
         });
+        console.log(article.bulletPoints);
 
         // Add bullet points to the image container so they can be displayed over the image
         imgContainer.appendChild(bulletPointsList);
@@ -164,9 +167,13 @@ function sortArticles(filter) {
 }
 
 // When the page is loaded
-window.onload = function() {
+window.onload = async function() {
+    // Initialize the articles array
+    await initializeArticlesArray();
+
     // Show all the articles
     sortArticles("dateNew");
+
     // An event listener for when the search is being used
     document.getElementById("searchInput").onkeyup = function() {
         // Call the search when the key is released
@@ -182,20 +189,4 @@ window.onload = function() {
     });
 };
 
-var map = L.map('map').setView([24, -77], 5);
-L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 19,
-    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-}).addTo(map);
 
-var puertoRico = L.marker([18.2, -66.5]).addTo(map);
-puertoRico.bindPopup("<a href='https://www.coris.noaa.gov/monitoring/status_report/docs/PR_508_compliant.pdf' target='_blank' class='image-link'><b>Puerto Rico</b><a>");
-
-var florida = L.marker([27.6, -81.5]).addTo(map);
-florida.bindPopup("<a href='https://www.coris.noaa.gov/monitoring/status_report/docs/FL_508_compliant.pdf' target='_blank' class='image-link'><b>Florida</b><a>");
-
-var flowerGardens = L.marker([27, -93]).addTo(map);
-flowerGardens.bindPopup("<a href='https://www.coris.noaa.gov/monitoring/status_report/docs/FGB_508_compliant.pdf' target='_blank' class='image-link'><b>Florida</b><a>");
-
-var virginIslands = L.marker([18.35, -64.9]).addTo(map);
-virginIslands.bindPopup("<a href='https://www.coris.noaa.gov/monitoring/status_report/docs/USVI_508_compliant.pdf' target='_blank' class='image-link'><b>Florida</b><a>");

@@ -554,12 +554,6 @@ function syncLowerTimelineToEntry() {
     
     // Find the corresponding year item for the current entry
     const currentEvent = Array.from(events).find(item => item.id === `entry-${timeline.indexOf(currentEntry) }`);
-    
-    // getting the year and going to the year instead of the flag
-    
-    // console.log(timeline.indexOf(currentEntry));
-    // console.log(currentEvent.id);
-    // console.log(currentEvent);
 
     if (currentEvent) {
         // Scroll the lower timeline so the entry's year is in view

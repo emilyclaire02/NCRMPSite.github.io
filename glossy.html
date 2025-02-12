@@ -15,8 +15,8 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
     crossorigin=""></script>
-    <script type="module" src = "code.js"></script>
-    <title>Glossy</title>
+    <script type="module" src = "glossyCode.js"></script>
+    <title>Reports</title>
 </head>
 
 <body>
@@ -25,28 +25,147 @@
         <a href="./publications.html">Publications</a>
         <a href="./about.html">About</a>
         <a href="./timeline.html">Timeline</a>
-        <a class="active" href="./glossy.html">Glossy</a>
+        <a class="active" href="./glossy.html">Reports</a>
     </div>
 
     <br><br>
-    <h1>Glossy</h1>
+    <h1>Reports</h1>
 
     <div id="map"></div>
 
-    <div id="glossy-list">  
-        <a href="https://www.coris.noaa.gov/monitoring/status_report/docs/FL_508_compliant.pdf" target="_blank" class="image-link">
-            <img src="./glossyMedia/flordia2020.png" alt="florida" class="glossy-picture left">
-        </a>
-        <a href="https://www.coris.noaa.gov/monitoring/status_report/docs/FGB_508_compliant.pdf" target="_blank" class="image-link">
-            <img src="./glossyMedia/flowergarden2020.png" alt="flower gardens" class="glossy-picture right">
-        </a>  
-        <a href="https://www.coris.noaa.gov/monitoring/status_report/docs/PR_508_compliant.pdf" target="_blank" class="image-link">
-            <img src="./glossyMedia/puertorico2020.png" alt="puerto rico" class="glossy-picture left">
-        </a>
-        <a href="https://www.coris.noaa.gov/monitoring/status_report/docs/USVI_508_compliant.pdf" target="_blank" class="image-link">
-            <img src="./glossyMedia/virginislands2020.png" alt="us virgin islands" class="glossy-picture right">
-        </a>
+    <p>
+        NOAA's Coral Reef Conservation Program (CRCP) supports the National Coral Reef Monitoring Program (NCRMP) throughout the U.S. Pacific, Atlantic, Gulf of Mexico, and Caribbean coral reef areas. This program is a strategic framework for conducting sustained observations of biological, climatic, and socioeconomic indicators in U.S. states and territories. The resulting data provide a robust picture of the condition of U.S. coral reef ecosystems and the communities connected to them. The jurisdictional reports provide a regional specific analysis of data, while the national reprt contetualizes all of the jurisdictional reports. 
+    </p>
+    <br>
+    <h3>To view a region's status reports or tech reports, click on the region's pin on the map or click on the region's name below.</h3>
+
+    <br>
+    <h1>Jurisdictions</h1>
+
+    <div id="glossy-list">
+        <img src="./glossyMedia/florida_cover.png" alt="florida" id="florida_cover" class="glossy-picture">
+
+        <div id="florida_images" class="hidden images">
+            <div class="report-section">
+                <h2>Status Report</h2>
+                <div id="florida_status" class="reports status">
+                    <a href="https://www.coris.noaa.gov/monitoring/status_report/docs/FL_508_compliant.pdf" target="_blank" class="image-link">
+                        <img src="./glossyMedia/flordia2020.png" alt="Florida Report" class="reportMedia">
+                    </a>
+                </div>
+            </div>
+        
+            <div class="report-section">
+                <h2>Tech Reports</h2>
+                <div id="florida_tech" class="reports">                    
+                    <a href="https://repository.library.noaa.gov/view/noaa/55833" target="_blank" class="image-link">
+                        <img src="./glossyMedia/floridaTech2022.png" alt="florida tech report" class="reportMedia">
+                    </a>
+                    <a href="https://repository.library.noaa.gov/view/noaa/45394" target="_blank" class="image-link">
+                        <img src="./glossyMedia/floridaTech2020.png" alt="florida tech report" class="reportMedia">
+                    </a>
+                    </div>
+            </div>
+        </div>
+
+        <br><br>
+
+        <img src="./glossyMedia/flowergardenbanks_cover.png" alt="flower gardens" id="flowergarden_cover" class="glossy-picture">
+
+        <div id="flowergarden_images" class="hidden">
+            <div class="report-section">
+                <h2>Status Report</h2>
+                <div id="flowergarden_status" class="reports status">
+                    <a href="https://www.coris.noaa.gov/monitoring/status_report/docs/FGB_508_compliant.pdf" target="_blank" class="image-link">
+                        <img src="./glossyMedia/flowergarden2020.png" alt="flower gardens" class="reportMedia">
+                    </a>  
+                </div>
+            </div>
+        
+            <div class="report-section">
+                <h2>Tech Reports</h2>
+                <div id="flowergarden_tech" class="reports">
+                    <a href="https://repository.library.noaa.gov/view/noaa/55813" target="_blank" class="image-link">
+                        <img src="./glossyMedia/flowerGardenTech2022.png" alt="flower garden tech report" class="reportMedia">
+                    </a>
+                    </div>
+            </div>
+        </div>
+
+        <br><br>
+
+        <img src="./glossyMedia/puertorico_cover.png" alt="puerto rico" id="puertorico_cover" class="glossy-picture">
+
+        <div id="puertorico_images" class="hidden">
+            <div class="report-section">
+                <h2>Status Report</h2>
+                <div id="puertorico_status" class="reports">
+                    <a href="https://www.coris.noaa.gov/monitoring/status_report/docs/PR_508_compliant.pdf" target="_blank" class="image-link">
+                        <img src="./glossyMedia/puertorico2020.png" alt="puerto rico" class="reportMedia">
+                    </a>
+                    <a href="https://www.coris.noaa.gov/monitoring/status_report/docs/PR_Espanol_508_compliant.pdf" target="_blank" class="image-link">
+                        <img src="./glossyMedia/puertorico2020_spanish.png" alt="puerto rico" class="reportMedia">
+                    </a>
+                </div>
+            </div>
+        
+            <div class="report-section">
+                <h2>Tech Reports</h2>
+                <div id="puertorico_tech" class="reports">
+                    <a href="https://repository.library.noaa.gov/view/noaa/50955" target="_blank" class="image-link">
+                        <img src="./glossyMedia/islandsPuertoRicoTech2021.png" alt="puerto rico and virgin islands tech report" class="reportMedia">
+                    </a>
+                    <a href="https://repository.library.noaa.gov/view/noaa/30723" target="_blank" class="image-link">
+                        <img src="./glossyMedia/islandsPuertoRicoTech2019.png" alt="puerto rico and virgin islands tech report" class="reportMedia">
+                    </a>
+                    </div>
+            </div>
+        </div>
+
+        <br><br>
+
+        <img src="./glossyMedia/usvirginislands_cover.png" alt="us virgin islands" id="virginislands_cover" class="glossy-picture">
+
+        <div id="virginislands_images" class="hidden">
+            <div class="report-section">
+                <h2>Status Report</h2>
+                <div id="virginislands_status" class="reports status">
+                    <a href="https://www.coris.noaa.gov/monitoring/status_report/docs/USVI_508_compliant.pdf" target="_blank" class="image-link">
+                        <img src="./glossyMedia/virginislands2020.png" alt="us virgin islands" class="reportMedia">
+                    </a>
+                </div>
+            </div>
+        
+            <div class="report-section">
+                <h2>Tech Reports</h2>
+                <div id="virginislands_tech" class="reports">
+                    <a href="https://repository.library.noaa.gov/view/noaa/50955" target="_blank" class="image-link">
+                        <img src="./glossyMedia/islandsPuertoRicoTech2021.png" alt="puerto rico and virgin islands tech report" class="reportMedia">
+                    </a>
+                    <a href="https://repository.library.noaa.gov/view/noaa/30723" target="_blank" class="image-link">
+                        <img src="./glossyMedia/islandsPuertoRicoTech2019.png" alt="puerto rico and virgin islands tech report" class="reportMedia">
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <h1>National</h1>
+
+        <img src="./glossyMedia/national_cover.png" alt="national" id="national_cover" class="glossy-picture">
+
+        <div id="national_images" class="hidden">
+            <div class="report-section">
+                <h2>Status Report</h2>
+                <div id="national_status" class="reports status">
+                    <a href="https://repository.library.noaa.gov/view/noaa/27295" target="_blank" class="image-link">
+                        <img src="./glossyMedia/national2020.png" alt="Florida Report" class="reportMedia">
+                    </a>
+                </div>
+            </div>
+        </div>
+
     </div>
+
 </body>
 
 </html>

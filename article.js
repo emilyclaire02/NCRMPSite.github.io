@@ -7,20 +7,18 @@ class Article {
      * @param {string[]} bulletPoints // Summary of the article that is visible to the user
      * @param {string} image // An image that will be shown to the users
      * @param {string[]} authors // The authors
-     * @param {number} year // The year
      * @param {date} date // The date
      * @param {string[]} keywords // Keywords that are not visible to the user, but are still searchable
      * @param {string} link // A Link to the article
      */
 
 
-    constructor(title, citation, bulletPoints, image, authors, year, date, keywords, link) {
+    constructor(title, citation, bulletPoints, image, authors, date, keywords, link) {
         this.title = title;
         this.citation = citation;
         this.bulletPoints = bulletPoints;
         this.image = image;
         this.authors = authors;
-        this.year = year;
         this.date = date;
         this.keywords = keywords;
         this.link = link;
@@ -38,7 +36,6 @@ class Article {
         ["Bullet Point 1", "Bullet Point 2", "Bullet Point 3", "Bullet point 4"],
         "pictures/image.png",
         ["Author 1","Author 2","Author 3","Author 4","Author 5"],
-        2024,
         "YYYY-MM-DD",
         ["keyword1, "keyword2", "keyword3", "keyword4", "keyword5"],
         "www.link.com"
@@ -46,96 +43,64 @@ class Article {
 
 */
 
-const articles = [
-    new Article(
-        "Depth and structure as environmental drivers of fish communities across a shallow to mesophotic gradient in the northern US Virgin Islands",
-        "Heidmann, S.L., L.K. Olinger, V.W. Brandtneris, R.S. Ennis, J. Blondeau, L.J.W. Grove, & T.B. Smith (2024) Depth and structure as environmental drivers of fish communities across a shallow to mesophotic gradient in the northern US Virgin Islands. Bulletin of Marine Science. 100(2): 133–154. https://doi.org/10.5343/bms.2023.0022",
-        ["Comprehensive data on fish communities across a seascape scale", "Understanding the ecology and conservation of fishes in the western Atlantic.", "Stratified-random visual fish census", "Factors that drive fish communities on coral reefs"],
-        "pictures/depth.png",
-        ["Laura Jay W Grove","Jeremiah Blondeau","Sarah L Heidmann","Viktor W Brandtneris","Tyler B Smith", "Lauren K Olinger", "Rosmin S Ennis"],
-        2024,
-        "2024-01-03",
-        ["Virgin Islands"],
-        "https://doi.org/10.5343/bms.2023.0022"
-    ),
-    new Article(
-        "A quantitative assessment of the status of reef fish communities from a large-scale probability survey in southern Florida",
-        "Grove, L.J.W., S.G. Smith, J. Blondeau, & J.S. Ault (2024) A quantitative assessment of the status of reef fish communities from a large-scale probability survey in southern Florida. Bulletin of Marine Science. 100(2): 239–258. https://doi.org/10.5343/bms.2023.0020",
-        ["Ecosystem-scale evaluation of reef fish community status", "Large-scale diver surveys", "Identified habitat quality issues in southeast Florida", "Fishing issues throughout the ecosystem"],
-        "pictures/probability.png",
-        ["Laura Jay W Grove","Jeremiah Blondeau","Steven G Smith", "Jerald S Ault"],
-        2024,
-        "2023-09-14",
-        ["Florida"],
-        "https://doi.org/10.5343/bms.2023.0020"
-    ),
-    new Article(
-        "Expansion of an established fishery-independent survey into the US Virgin Islands' upper mesophotic zone: feasibility and management implications",
-        "Grove, L.J.W., J. Blondeau, D.W. Swanson, S.L. Heidmann, S.G. Smith, M.W. Johnson, V.W. Brandtneris, S.R. Sagarese, & T.B. Smith (2024) Expansion of an established fishery-independent survey into the US Virgin Islandsʼ upper mesophotic zone: feasibility and management implications. Bulletin of Marine Science. 100(2): 113–131. https://doi.org/10.5343/bms.2023.0013",
-        ["Established fishery-independent, diver-based reef fish visual survey to upper mesophotic reefs", "Grouper, snapper, triggerfish, and parrotfish"],
-        "pictures/hardbottomhabitat.png",
-        ["Laura Jay W Grove","Jeremiah Blondeau","Dione W Swanson","Sarah L Heidmann","Steven G Smith","Matthew W Johnson","Viktor W Brandtneris","Skyler R Sagarese","Tyler B Smith"],
-        2024,
-        "2023-10-09",
-        ["United States Caribbean"],
-        "https://doi.org/10.5343/bms.2023.0013"
-    ),
-    new Article(
-        "Quantifying hurricane impacts on United States Virgin Islands reef fishes using a catchability invariant approach to compare uncalibrated survey indices",
-        "Langwiser, C.L., N.R. Vaughan, & L.J.W. Grove (2024) Quantifying hurricane impacts on United States Virgin Islands reef fishes using a catchability invariant approach to compare uncalibrated survey indices. Bulletin of Marine Science. 100(3): 000–000. https://doi.org/10.5343/bms.2023.0011",
-        ["Identify reef fish community impacts following extreme events", "Ecologically important fish species subject to frequent severe weather disturbances"],
-        "pictures/hurricane.png",
-        ["Caitlin Langwiser", "Nathan R Vaughan", "Laura Jay W Grove"],
-        2024,
-        "2023-10-05",
-        ["Caribbean Sea"],
-        "https://doi.org/10.5343/bms.2023.0011"
-    ),
-    new Article(
-        "A quantitative assessment of the status of benthic communities on US Atlantic coral reefs using a novel standardized approach",
-        "Viehman, T.S., S.H. Groves, L.J.W. Grove, S.G. Smith, L. Mudge, C. Donovan, K. Edwards, & E.K. Towle (2024) A quantitative assessment of the status of benthic communities on US Atlantic coral reefs using a novel standardized approach. Bulletin of Marine Science. 100(2): 259–281. https://doi.org/10.5343/bms.2022.0025",
-        ["Data-driven evaluation of the status of corals and benthic communities in US Atlantic coral reef jurisdictions", "Findings show continued declines for multiple indicators in all regions except Flower Garden Banks"],
-        "pictures/jurisdictions.png",
-        ["T Shay Viehman", "Sarah H Groves", "Laura Jay W Grove", "Steven G Smith", "Laura Mudge", "Caroline Donovan", "Kimberly Edwards", "Erica K Towle"],
-        2024,
-        "2023-05-09",
-        ["Florida, Flower Garden Banks, Puerto Rico, and the US Virgin Islands", "Stony Coral Tissue Loss Disease"],
-        "https://doi.org/10.5343/bms.2022.0025"
-    ),
-    new Article(
-        "Integrating the US Caribbean Reef Fish Visual Census into fishery stock assessments",
-        "Ault J.S., J. Blondeau, L.J.W. Grove, S.L. Cass-Calay, & K.J. McCarthy (2024) Integrating the U.S. Caribbean reef-fish visual census into fishery stock assessments. Bulletin of Marine Science.  https://doi.org/10.5343/bms.2023.0025",
-        ["Quantitative information for data-poor fisheries to support regional stock assessments", "Probabilistic stratified random sampling design capitalizing on the strong mean-variance relationship of population abundance dependent on hardbottom habitats and depths.", "Statistical catch at age models"],
-        "pictures/forklength.png",
-        ["Jerald S Ault", "Jeremiah Blondeau", "Laura Jay W Grove", "Shannon L Cass-Calay", "Kevin J McCarthy"],
-        2024,
-        "2023-11-08",
-        [""],
-        "https://doi.org/10.5343/bms.2023.0025"
-    ),
-    new Article(
-        "Distribution and abundance of herbivorous reef fishes on a barrier reef system in the Florida Keys and Dry Tortugas, Florida",
-        "Herbig, J.L., J.C. Olsen, J.A. Keller, L.J.W. Grove, C.P. Shea, & A. Acosta (2024) Distribution and abundance of herbivorous reef fishes on a barrier reef system in the Florida Keys and Dry Tortugas. Bulletin of Marine Science. https://doi.org/10.5343/bms.2022.0013",
-        ["Habitat influences spatial patterns of herbivorous fish densities and species richness", "Underwater visual surveys", "Herbivore occurrence, density, and species richness increased as percent of low relief hardbottom habitat"],
-        "pictures/herbivore.png",
-        ["Jennifer L Herbig", "Jack C Olson", "Jessica A Keller", "Laura Jay W Grove", "Colin P Shea", "Alejandro Acosta"],
-        2022,
-        "2022-10-05",
-        ["Florida Keys and Dry Tortugas"],
-        "https://doi.org/10.5343/bms.2022.0013"
-    ),
-    new Article(
-        "Low net carbonate accretion characterizes Florida’s coral reef",
-        "Morris, J.T., I.C. Enochs, N. Besemer, T.S. Viehman, S.H. Groves, J. Blondeau, C. Ames, E.K. Towle, L.J.W. Grove, & D. Manzello (2022) Low net carbonate accretion characterizes Florida’s coral reef. Scientific Reports. 12: 19582. https://doi.org/10.1038/s41598-022-23394-4",
-        ["Benthic cover and parrotfish demographic data", "Results highlight the erosional state of the majority of the study sites", "Mid-channel reefs in the Florida Keys have the highest net carbonate production", "Florida reefs are in a net erosional state"],
-        "pictures/spatial.png",
-        ["JohnT. Morris", "Ian C. Enochs", "Nicole Besemer", "T. ShayViehman", "Sarah H.Groves", "Jeremiah Blondeau", "CoryAmes", "Erica K.Towle", "Laura Jay W.Grove", "Derek P. Manzello"],
-        2022,
-        "2022-11-15",
-        ["Florida"],
-        "https://doi.org/10.1038/s41598-022-23394-4"
-    )
-];
+const articles = [];
 
-// Export the articles so they can be used in other classes
-export { Article, articles };
+
+
+async function loadTSVToArticles(tsvFilePath) {
+    try {
+        const response = await fetch(tsvFilePath);
+        if (!response.ok) throw new Error(`Failed to load file: ${response.statusText}`);
+
+        const data = await response.text();
+        const rows = data.trim().split('\n');
+        const headers = rows[0].split('\t').map(header => header.trim());
+
+        rows.slice(1).forEach(row => {
+            const values = row.split('\t');
+            const entryData = {};
+
+            headers.forEach((header, index) => {
+                entryData[header] = values[index];
+            });
+
+            if (entryData.image != "") {
+                entryData.image = "pictures/" + entryData.title + ".jpg";
+            } else {
+                entryData.image = "pictures/default.jpg";
+            }
+
+            const entry = new Article(
+                entryData.title || null,
+                entryData.citation || null,
+                entryData.bulletPoints ? entryData.bulletPoints.split(',') : [],
+                entryData.image || null,
+                entryData.authors ? entryData.authors.split(',') : [],
+                entryData.date || null,
+                entryData.keywords ? entryData.keywords.split(',') : [],
+                entryData.link || null
+            );
+
+            articles.push(entry);
+        });
+
+        console.log("Articles successfully loaded from TSV file:", articles);
+    } catch (error) {
+        console.error("Error loading TSV file:", error);
+        throw error;
+    }
+}
+
+// DATA UPDATED AS OF 2/11/2025
+
+async function initializeArticlesArray() {
+    try {
+        await loadTSVToArticles('./publicationsInput.tsv');
+        console.log("Articles array initialized successfully.");
+    } catch (error) {
+        console.error("Failed to initialize array:", error);
+    }
+}
+
+
+export { Article, articles, initializeArticlesArray };

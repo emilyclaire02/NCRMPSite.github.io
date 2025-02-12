@@ -46,14 +46,17 @@ citation: The citation
 bulletPoints: As ummary of the article that is visible to the user  
 image: An image that will be shown to the users. Put these images in the "pictures" folder".  
 authors: The authors  
-year: The year the publication was published  
 date: The date the publicaition was published  
 keywords: Keywords that are not visible to the user, but are still searchable  
 link: A Link to the article  
 
-#### Adding a New Publication
+#### Adding a New Publication Entry
 
-To add an article to the page, create a new Article object in the articles array using this template.
+Adding a new entry to the publications can be done in two ways, manually inputting an entry into the articles array, or loading a tsv file.
+
+##### Manual Input:
+
+To add an entry to the page, create a new Article object in the articles array using this template.
 
 Template:
 
@@ -69,31 +72,52 @@ new Article(
     "www.link.com"  
 )  
 
+##### TSV Input:
+
+Download the "Publications Page Template" Google Sheets and name it "publicationsInput.tsv".
+Download all the pictures from the "pictures" folder in the Google Drive and put it in the "pictures" folder.
+Edit the comment on line 94 in the article.js file with the current date
+
+The initializeArticlesArray() function will then take every line of the spreadsheet and create a new Article to add to the articles array.
+
 ### About Us
 
 The About Us page displays each team member using HTML. Each person has a name, picture, bio, title, and email associated with them. The list of people can go under the "Team", "Current Interns", or "Past Interns" heading. Each heading has a "bio" div where the people are listed. 
 
+The People class in about.js contains a constructor with all the elements needed to display a person. The parameters are: 
+
+name: The person's name
+title: The person's title
+email: The person's email
+bio: A short bio of 500 characters
+image: An image that is visible to users
+group: The group they are a part of: team, currentInterns, pastInterns
+
 #### Adding a New Person
 
-To add a new person, identify the "bio" div of the group the person is a part of. Fill out the following template and add it to the "bio" div.
+Adding a new entry to the publications can be done in two ways, manually inputting an entry into the articles array or loading a tsv file.
+
+##### Manual Input:
+
+To add a person to the page, create a new Person object in the people array using this template.
 
 Template:
 
-    <div class="person">
-        <h2>First Last</h2>
-        <div class="flip-card">
-            <div class="flip-card-front">
-                <img src="pictures/profile.jpg" alt="person" class="card-image">
-            </div>
-            <div class="flip-card-back">
-                <p>Bio</p>
-            </div>
-        </div>
-        <div class="contact-info">
-            <h3>Title</h3>
-            <p>Email: first.last@email.com</p>
-        </div>
-    </div>
+new Person(
+    "Name",
+    "Title",
+    "email.gmail.com",
+    "bio",
+    "aboutPictures/image.jpg",
+    "group",
+)
+
+##### TSV Input:
+
+Download the "About Us Page Template" Google Sheets and name it "aboutInput.tsv".
+Download all the pictures from the "pictures" folder in the Google Drive and put it in the "aboutPictures" folder.
+
+The initializePeopleArray() function will then take every line of the spreadsheet and create a new Person to add to the people array.
 
 ### Timeline 
 
@@ -111,7 +135,7 @@ spacer: The space between flags. This is dynamically calculated.
 
 #### Adding a New Timeline Entry
 
-Adding a new entry to the timeline can be done in two ways, manually inputting an entry into the timeline array, or laoding a tsv file.
+Adding a new entry to the timeline can be done in two ways, manually inputting an entry into the timeline array, or loading a tsv file.
 
 ##### Manual Input:
 
