@@ -6,6 +6,7 @@
 2. [Key Features](#key-features)
 3. [Installation](#installation)
 4. [Usage](#usage)
+    - [Home](#home)
     - [Publications](#publications)
     - [About Us](#about-us)
     - [Timeline](#timeline)
@@ -34,6 +35,28 @@ gh repo clone emilyclaire02/NCRMPSite.github.io
 cd NCRMPSite
 
 ## Usage
+
+### Home
+
+The About Us page displays a photo carousal and links to other pages on the website.
+
+The Photos class in home.js contains a constructor with all the elements needed to display a photo. The parameters are: 
+
+name: The name of the photo in homePhotos
+credit: The credit for who took the photo
+description: A description of the photo 
+
+#### Adding a New Person
+
+To add a person to the page, create a new Person object in the photos array using this template.
+
+Template:
+
+new Photo(
+    "Name",
+    "Credit",
+    "Description",
+)
 
 ### Publications
 
