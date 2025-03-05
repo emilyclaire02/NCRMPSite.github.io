@@ -46,7 +46,7 @@ name: The name of the photo in homePhotos
 credit: The credit for who took the photo
 description: A description of the photo 
 
-#### Adding a New Person
+#### Adding a New Photo
 
 To add a person to the page, create a new Person object in the photos array using this template.
 
@@ -57,6 +57,22 @@ new Photo(
     "Credit",
     "Description",
 )
+
+#### Adding a New Page
+
+To add a new page to link to, follow this template. 
+
+    <div class="page-container">
+        <h1>Name</h1>
+        <div class="information-container">
+            <div class="text-container">
+                Description of the page in 94 words or less.
+            </div>
+            <a href="./about.html">
+                <img src="./homePhotos/aboutUsIcon.png" alt="people icon" class="home-icons">
+            </a>
+        </div>
+    </div>
 
 ### Publications
 

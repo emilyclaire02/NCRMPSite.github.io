@@ -850,7 +850,7 @@ p {
 }
 
 .text-container {
-    font-size: 2vw;
+    font-size: 1.7vw;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -860,4 +860,20 @@ p {
     height: 20vh;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
     border-radius: 8px;  
-    margin:
+    margin: 0 20px;
+    padding: 10px;
+    flex-direction: column;
+}
+
+#home-header {
+    font-size: 70px;
+}
+
+#photo-credit {
+    font-size: 10px;
+    text-align: right; 
+    width: fit-content; 
+    max-width: 100%;  
+    margin-left: auto; 
+    display: block;     
+}
