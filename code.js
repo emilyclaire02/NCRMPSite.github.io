@@ -37,7 +37,8 @@ function displayArticles() {
         const authors = document.createElement('h5');
         const articleAuthors = article.authors
         var authorsText = ""
-        let [currYear, , currdate] = article.date.split("-");
+        let [currYear, , currdate] = (article.date || "").split("-");
+        //let [currYear, , currdate] = article.date.split("-");
         // Limit the authors shown to 3
         if(articleAuthors.length <= 3) {
             authorsText = articleAuthors.toString() + ", (" + currYear + ")"
@@ -53,6 +54,12 @@ function displayArticles() {
         const img = document.createElement('img');
         img.src = article.image;
         img.alt = "image";
+
+        img.onerror = function() {
+            this.onerror = null; // Prevent infinite loop in case the default image also fails
+            this.src = "pictures/NOAAlogo.png";
+        };
+
         imgContainer.appendChild(img);
 
         // Citation button
@@ -74,7 +81,7 @@ function displayArticles() {
             entry.textContent = point;
             bulletPointsList.appendChild(entry);
         });
-        console.log(article.bulletPoints);
+        //console.log(article.bulletPoints);
 
         // Add bullet points to the image container so they can be displayed over the image
         imgContainer.appendChild(bulletPointsList);
