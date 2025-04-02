@@ -12,7 +12,7 @@ class Article {
      * @param {string} link // A Link to the article
      */
 
-
+    // Constructor for Article class
     constructor(title, citation, bulletPoints, image, authors, date, keywords, link) {
         this.title = title;
         this.citation = citation;
@@ -45,31 +45,38 @@ class Article {
 
 const articles = [];
 
-
-
+// Function for loading a tsv file of articles into the articles array
 async function loadTSVToArticles(tsvFilePath) {
     try {
+        // Fetch the TSV file
         const response = await fetch(tsvFilePath);
         if (!response.ok) throw new Error(`Failed to load file: ${response.statusText}`);
 
+        // Parse the TSV file
         const data = await response.text();
         const rows = data.trim().split('\n');
         const headers = rows[0].split('\t').map(header => header.trim());
 
+        // Process each data row
         rows.slice(1).forEach(row => {
             const values = row.split('\t');
             const entryData = {};
 
+            // Map headers to values
             headers.forEach((header, index) => {
                 entryData[header] = values[index];
             });
 
+            // Add the picture path
             if (entryData.image != "") {
+                // Use the title as the image name
                 entryData.image = "pictures/" + entryData.title + ".jpg";
             } else {
+                // If the image is not provided, use a default image
                 entryData.image = "pictures/default.jpg";
             }
 
+            // Create a new Article object
             const entry = new Article(
                 entryData.title || null,
                 entryData.citation || null,
@@ -81,9 +88,9 @@ async function loadTSVToArticles(tsvFilePath) {
                 entryData.link || null
             );
 
+            // Add the entry to the articles array
             articles.push(entry);
         });
-
         console.log("Articles successfully loaded from TSV file:", articles);
     } catch (error) {
         console.error("Error loading TSV file:", error);
@@ -93,8 +100,10 @@ async function loadTSVToArticles(tsvFilePath) {
 
 // DATA UPDATED AS OF 3/19/2025
 
+// Function for initializing the articles array
 async function initializeArticlesArray() {
     try {
+        // Load the TSV file
         await loadTSVToArticles('./publicationsInput.tsv');
         console.log("Articles array initialized successfully.");
     } catch (error) {
@@ -102,5 +111,5 @@ async function initializeArticlesArray() {
     }
 }
 
-
+// Export the Article class so it can be used in publications.js
 export { Article, articles, initializeArticlesArray };

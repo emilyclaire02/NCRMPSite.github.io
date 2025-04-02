@@ -1,36 +1,47 @@
 
+// Set the default variables
 let currentEntry = null;
 let currentEntryIndex = 0;
+// The year of the first event in the timeline
 let firstYear = 2002;
+// The year of the last event in the timeline
 let finalYear = 2024;
 
-// implement scrolling
-document.addEventListener('DOMContentLoaded', () => {
 
+// Implement scrolling through timeline
+document.addEventListener('DOMContentLoaded', () => {
+    // Set the defaults 
     let mouseDown = false;
-  
     let initialGrabPosition = 0;
     let initialScrollPosition = 0;
   
+    // Get the scrollable timeline
     const scrollableElement = document.querySelector('.scrollable');
    
+    // Add event listeners
     scrollableElement.addEventListener('mousedown', (mouseEvent) => {
       mouseDown = true;
+      // Set the cursor to 'grabbing' to indicate that the element is being dragged
       scrollableElement.style.cursor = 'grabbing';
+      // Store the initial position of the mouse
       initialGrabPosition = mouseEvent.clientX;
       initialScrollPosition = scrollableElement.scrollLeft;
     });
 
+    // Changing the background image as it scrolls
     const updateBackgroundPosition = () => {
+        // Move the background image according to how far the image is scrolled
         const scrollPosition = scrollableElement.scrollLeft;
         scrollableElement.style.backgroundPosition = `${-scrollPosition}px center`;
     };
   
+    // Remove the 'grabbing' cursor when the mouse button is released
     scrollableElement.addEventListener('mouseup', () => {
       mouseDown = false;
       scrollableElement.style.cursor = 'grab';
     });
   
+    // Move the timeline according to the mouse position
     scrollableElement.addEventListener('mousemove', (mouseEvent) => {
       if (mouseDown) {
         const mouseMovementDistance = mouseEvent.clientX - initialGrabPosition;
@@ -40,43 +51,49 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // implement zooming
-
+  // Implement zooming in on the timeline
   document.addEventListener('DOMContentLoaded', () => {
-
+    // Get the timeline
     const zoomableElement = document.querySelector('.zoomable');
     const containerElement = document.querySelector('.scrollable');
   
+    // Set the default variabled
     let scale = 1;
-  
     let mouseHasMoved = true;
     let mousePositionRelative;
     let elementUnderMouse;
   
+    // Add event listeners
     zoomableElement.addEventListener('mousemove', () => {
       mouseHasMoved = true
     });
   
+    // Add event listener for the scroll wheel
     zoomableElement.addEventListener('wheel', (wheelEvent) => {
-      if (isVerticalScrolling(wheelEvent)) {
-        wheelEvent.preventDefault();
-  
-        scale = computeScale(scale, wheelEvent.deltaY);
-        zoomableElement.style.width = scale * 100 + '%';
-  
-        if (mouseHasMoved) {
-          elementUnderMouse = findElementUnderMouse(wheelEvent.clientX);
-          mousePositionRelative = (wheelEvent.clientX - getLeft(elementUnderMouse)) / getWidth(elementUnderMouse);
-          mouseHasMoved = false;
-        }
-  
-        const mousePosition = wheelEvent.clientX;
-        const elementUnderMouseLeft = getLeft(elementUnderMouse);
-        const zoomableLeft = getLeft(zoomableElement);
-        const containerLeft = getLeft(containerElement);
-        const moveAfterZoom = getWidth(elementUnderMouse) * mousePositionRelative;
-  
-        containerElement.scrollLeft = Math.round(elementUnderMouseLeft - zoomableLeft - mousePosition + containerLeft + moveAfterZoom);
+        // Check if the scroll wheel is being scrolled vertically
+        if (isVerticalScrolling(wheelEvent)) {
+            // Prevent the default behavior of the scroll wheel
+            wheelEvent.preventDefault();
+    
+            // Update the scale based on how far the scroll wheel has been scrolled
+            scale = computeScale(scale, wheelEvent.deltaY);
+            // Update the width of the timeline element
+            zoomableElement.style.width = scale * 100 + '%';
+    
+            // Zoom in according to the mouse position on the timeline
+            if (mouseHasMoved) {
+                elementUnderMouse = findElementUnderMouse(wheelEvent.clientX);
+                mousePositionRelative = (wheelEvent.clientX - getLeft(elementUnderMouse)) / getWidth(elementUnderMouse);
+                mouseHasMoved = false;
+            }
+    
+            const mousePosition = wheelEvent.clientX;
+            const elementUnderMouseLeft = getLeft(elementUnderMouse);
+            const zoomableLeft = getLeft(zoomableElement);
+            const containerLeft = getLeft(containerElement);
+            const moveAfterZoom = getWidth(elementUnderMouse) * mousePositionRelative;
+    
+            containerElement.scrollLeft = Math.round(elementUnderMouseLeft - zoomableLeft - mousePosition + containerLeft + moveAfterZoom);
       }
     });
   
@@ -159,6 +176,50 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+const regionSelect = document.getElementById('regions');
+
+// Add event listener for 'change' event
+regionSelect.addEventListener('change', function(event) {
+    // This code runs when the selection changes
+    const region = event.target.value;
+    console.log('Selected region:', region);
+    
+    // Update the timeline based on the region
+    updateTimeline(region);
+});
+// Function that edits the current timeline to display entries from a specific region
+function updateTimeline(region) {
+    // Clear the current timeline
+    timeline.length = 0;
+    
+    if (region === 'all') {
+        // If "All" is selected, copy all entries from fullTimeline
+        fullTimeline.forEach(entry => {
+            timeline.push(entry);
+        });
+    } else {
+        // Filter entries that include the selected region
+        fullTimeline.forEach(entry => {
+            if (entry.region.includes(region)) {
+                timeline.push(entry);
+            }
+        });
+    }
+    
+    // Reset to the first entry if timeline isn't empty
+    if (timeline.length > 0) {
+        currentEntryIndex = 0;
+        currentEntry = timeline[0];
+    } else {
+        currentEntry = null;
+        currentEntryIndex = 0;
+    }
+    
+    // Rebuild the timeline display
+    showCurrentEntry();
+    buildTimeline();
+    buildYears();
+}
 class TimelineEntry {
     /**
      * @param {string} preview // A short overview
@@ -167,10 +228,12 @@ class TimelineEntry {
      * @param {string} media // Some sort of media. Image, video, audio, etc.
      * @param {string} icon // An icon to be displayed 
      * @param {string} date // The full date in "dd-mm-yyyy" format
-     * @param {float} spacer // space between flags
+     * @param {float} spacer // Space between flags
+     * @param {string[]} region // The region the event took place in
+     * @param {string} credit // The credit for the media
      */
 
-    constructor(preview, description, mediaType, media, icon, date, spacer) {
+    constructor(preview, description, mediaType, media, icon, date, region, credit) {
         this.preview = preview;
         this.description = description;
         this.mediaType = mediaType;
@@ -178,91 +241,16 @@ class TimelineEntry {
         this.icon = icon;
         this.date = date;
         this.spacer = null;
+        this.region = region;
+        this.credit = credit;
     }
 }
 
-const timeline = [
-    // new TimelineEntry(
-    //     "I was born",
-    //     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-    //     "image",
-    //     "timelineMedia/threedayoldemily.JPG",
-    //     "none",
-    //     "09-30-2002"
-    // ),
+// Array that contains all entries in the timeline
+let fullTimeline = [];
 
-    // new TimelineEntry(
-    //     "I became a big sister",
-    //     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-    //     "image",
-    //     "timelineMedia/brobo.JPG",
-    //     "image",
-    //     "04-06-2004"
-    // ),
-
-    // new TimelineEntry(
-    //     "I became an even bigger sister",
-    //     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-    //     "image",
-    //     "timelineMedia/elliotborn.JPG",
-    //     "none.png",
-    //     "05-13-2006"
-    // ),
-
-    // new TimelineEntry(
-    //     "I started kindergarden",
-    //     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-    //     "image",
-    //     "timelineMedia/firstday.JPG",
-    //     "image",
-    //     "08-29-2008"
-    // ),
-
-    // new TimelineEntry(
-    //     "I competed in my first pageant",
-    //     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-    //     "image",
-    //     "timelineMedia/firstpageant.jpg",
-    //     "crown.png",
-    //     "06-26-2011"
-    // ),
-
-    // new TimelineEntry(
-    //     "I competed in my first NAM national pageant",
-    //     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-    //     "video",
-    //     "https://www.youtube.com/embed/D0kreEtq6bg?si=CSF3tdGYEgxSBopS",
-    //     "crown.png",
-    //     "11-28-2013"
-    // ),
-
-    // new TimelineEntry(
-    //     "I won my first NAM state title",
-    //     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-    //     "image",
-    //     "timelineMedia/preteen.jpg",
-    //     "crown",
-    //     "07-15-2014"
-    // ), 
-
-    // new TimelineEntry(
-    //     "I got top 10 at NAM nationals",
-    //     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-    //     "image",
-    //     "timelineMedia/top10.JPG",
-    //     "crown",
-    //     "11-22-2014"
-    // ), 
-
-    // new TimelineEntry(
-    //     "I moved to Maryland",
-    //     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-    //     "image",
-    //     "timelineMedia/moving.jpg",
-    //     "none",
-    //     "06-04-2018"
-    // )
-]
+// Array that contains only the timeline entries that will be displayed
+const timeline = []
 
 window.onload = function () {
     initializeTimeline()
@@ -290,6 +278,9 @@ async function initializeTimeline() {
     } catch (error) {
         console.error("Failed to initialize timeline:", error);
     }
+    for(let i = 0; i < fullTimeline.length; i++) {
+        timeline[i] = fullTimeline[i];
+    }
 }
 
 
@@ -304,11 +295,14 @@ function showCurrentEntry() {
 
     let media = null;
 
+    let mediaContainer = document.createElement('div');
+    mediaContainer.id = "media-container";
+
     if(currentEntry.mediaType == "image") {
         media = document.createElement('img');
         media.src = currentEntry.media; 
         media.alt = `media`;
-        media.id = "media";
+        media.id = "timeline-media";
     } else if (currentEntry.mediaType == "video") {
         media = document.createElement('iframe');
         media.src = currentEntry.media; // Assuming `currentEntry.videoId` contains the YouTube video ID
@@ -316,7 +310,17 @@ function showCurrentEntry() {
         media.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"; // Permissions for video playback
         media.allowFullscreen = true; // Enable fullscreen option
     }
+    media.setAttribute("style", "height: 34vh;");
 
+    // Create the container for the photo credit
+    const creditContainer = document.createElement('div');
+    creditContainer.id = "timeline-photo-credit"
+    creditContainer.innerHTML = `${currentEntry.credit}`
+    // creditContainer.setAttribute("style", "text-align: right;");
+    // creditContainer.setAttribute("style", "font-size: 10px;");
+
+    mediaContainer.appendChild(media);
+    mediaContainer.appendChild(creditContainer);
 
     const textContainer = document.createElement('div');
     textContainer.id = "entry-description"
@@ -335,7 +339,8 @@ function showCurrentEntry() {
     description.textContent = currentEntry.description;
 
     // Append the main list to the timeline container
-    entryContainer.appendChild(media);
+    entryContainer.appendChild(mediaContainer);
+    //entryContainer.appendChild(media);
     textContainer.appendChild(title);
     textContainer.appendChild(year);
     textContainer.appendChild(description);
@@ -581,8 +586,8 @@ async function loadTSVToTimeline(tsvFilePath) {
 
         const headers = rows[1].split('\t').map(header => header.trim().replace(/\r$/, ''));
         console.log("Headers:", headers);
-
-
+ 
+ 
         // Skip the first two rows (metadata and headers) and process remaining rows
         const dataRows = rows.slice(2);
 
@@ -607,13 +612,15 @@ async function loadTSVToTimeline(tsvFilePath) {
                 entryData.mediaType || null,
                 entryData.media || null,
                 entryData.icon || "none",
-                entryData.date || null
+                entryData.date || null,
+                entryData.region ? entryData.region.split(',') : [],
+                entryData.credit || "",
             );
 
-            timeline.push(entry);
+            fullTimeline.push(entry);
         });
 
-        console.log("Timeline successfully loaded from TSV file:", timeline);
+        console.log("Timeline successfully loaded from TSV file:", fullTimeline);
     } catch (error) {
         console.error("Error loading TSV file:", error);
         throw error; // Rethrow to notify the caller of failure

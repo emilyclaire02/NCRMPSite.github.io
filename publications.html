@@ -8,13 +8,14 @@
     <meta name="keywords" content="HTML5, Responsive">
     <link rel="icon" href="pictures/NOAAlogo.png" type="image/png">
     <link rel="stylesheet" href="style.css" type="text/css">
-    <script type="module" src = "code.js"></script>
+    <script type="module" src = "publications.js"></script>
     <title>Publications</title>
 </head>
 
 
 <body>
 
+    <!-- Navigation Bar -->
     <div class="topnav">
         <a href="./index.html">Home</a>
         <a class="active" href="./publications.html">Publications</a>
@@ -25,12 +26,16 @@
 
     <br>
 
+    <!-- Banner image -->
     <img src="pictures/banner3.png" alt="scubadiver" id="banner">
 
     <br><br>
+    <!-- Container for the search tools -->
     <div id="search">
+        <!-- Search bar -->
         <input type="text" id="searchInput" placeholder="Search Publications...">
         <br>
+        <!-- Sorting drop down menu -->
         Sort by: <select id="sortBy">
             <option value="dateNew">Date (Newest-Oldest)</option>
             <option value="dateOld">Date (Oldest-Newest)</option>
@@ -41,6 +46,7 @@
         </select>
     </div>
 
+    <!-- Container for all the articles -->
     <div class="articles" id="articles-container"></div>
     
 </body>

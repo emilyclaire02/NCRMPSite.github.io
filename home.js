@@ -1,10 +1,16 @@
 let currentPhoto = null;
 let currentPhotoIndex = 0;
+let autoSlideInterval = 0;
 
+// Start carousal when the page laods
 window.onload = function () {
     if (photos.length > 0) {
+        // Shuffle the photos so they are different each time
+        shufflePhotos(photos);
+        // Start on the first photo in the photos array
         currentPhoto = photos[0];
         currentPhotoIndex = 0;
+        // Display photos
         showCurrentPhoto();
         startAutoSlide();
     } else {
@@ -12,9 +18,9 @@ window.onload = function () {
     }
 };
 
+// Allow functions to be called from the global scope
 window.previousPhoto = previousPhoto;
 window.nextPhoto = nextPhoto;
-window.setPhoto = setPhoto;
  
 class Photo {
     /**
@@ -23,6 +29,7 @@ class Photo {
      * @param {string} description // A description of the photo 
      */
 
+    // Constructor for Photo class
     constructor(name, credit, description) {
         this.name = name;
         this.credit = credit;
@@ -30,6 +37,7 @@ class Photo {
     }
 }
 
+// Array that contains all the photos in the carousal
 const photos = [
     new Photo("A Cer with Grunt juv.jpg", "NOAA Fisheries Photo by Caitlin Langwiser", "White grunts (haemulon plumierii) swimming around acropora cervicornis"),
     new Photo("C Nat with anemone.jpg", "NOAA Fisheries Photo by Caitlin Langwiser", "Colpophyllia natans with anemone"),
@@ -70,12 +78,16 @@ function showCurrentPhoto(direction = 'next') {
 
     // Add the photo
     let photo = document.createElement('img');
+    // The photo src uses the name of the photo in the photos array
     photo.src = "./homePhotos/" + currentPhoto.name; 
+    // Get the other attributes from the array
     photo.alt = currentPhoto.description;
     photo.id = currentPhoto.name;
     photo.className = "carousalPhoto";
+    // Add the slide-in or slide-out class, depending on the direction
     photo.classList.add(direction === 'next' ? 'slide-in' : 'slide-out');
 
+    // Create the text and credit containers
     const textContainer = document.createElement('div');
     textContainer.id = "photo-description"
     textContainer.innerHTML = `<p>${currentPhoto.description}</p>`
@@ -89,10 +101,12 @@ function showCurrentPhoto(direction = 'next') {
     carousalContainer.appendChild(creditContainer);
     carousalContainer.appendChild(textContainer);
 
+    // Remove the slide-in or slide-out class 
     setTimeout(() => {
         photo.classList.remove('slide-in', 'slide-out');
     }, 10);
 
+    // Remove the existing photo with the CSS transition
     if (existingPhoto) {
         existingPhoto.classList.add(direction === 'next' ? 'slide-out' : 'slide-in');
         setTimeout(() => {
@@ -101,43 +115,53 @@ function showCurrentPhoto(direction = 'next') {
     }
 }
 
+// Function to show the previous photo
 function previousPhoto() {
+    // If the current photo is not the first photo, go to the previous photo
     if (currentPhotoIndex > 0) {
         currentPhotoIndex--;
     } else {
+        // Otherwise, go to last photo in the array
         currentPhotoIndex = photos.length - 1;
     }
+    // Update the current photo
     currentPhoto = photos[currentPhotoIndex];
     showCurrentPhoto('prev');
     resetAutoSlide();
 }
 
+// Function to show the next photo
 function nextPhoto() {
+    // If the current photo is not the last photo, go to the next photo
     if (currentPhotoIndex < photos.length - 1) {
         currentPhotoIndex++;
     } else {
+        // Otherwise, go to the first photo in the array
         currentPhotoIndex = 0;
     }
-
+    // Update the current photo
     currentPhoto = photos[currentPhotoIndex];
     showCurrentPhoto('next');
     resetAutoSlide();
 }
 
-
-function setPhoto(photoIndex) {
-    if(photoIndex <= photos.length) {
-        currentPhotoIndex = photoIndex;
-        currentPhoto = photos[photoIndex];
-    }
-    showCurrentPhoto();
-}
-
+// Function to start the auto slide
 function startAutoSlide() {
+    // Set the interval to change the photo every 10 seconds
     autoSlideInterval = setInterval(nextPhoto, 10000); 
 }
 
+// Function to reset the auto slide
 function resetAutoSlide() {
+    // Set the interval to 0
     clearInterval(autoSlideInterval);
     startAutoSlide();
+}
+
+function shufflePhotos(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        let j = Math.floor(Math.random() * (i + 1)); // Get a random index
+        [array[i], array[j]] = [array[j], array[i]]; // Swap elements
+    }
+    return array;
 }
