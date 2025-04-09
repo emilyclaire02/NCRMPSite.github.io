@@ -70,10 +70,10 @@ async function loadTSVToArticles(tsvFilePath) {
             // Add the picture path
             if (entryData.image != "") {
                 // Use the title as the image name
-                entryData.image = "pictures/" + entryData.title + ".jpg";
+                entryData.image = "./publications/pictures/" + entryData.title + ".jpg";
             } else {
                 // If the image is not provided, use a default image
-                entryData.image = "pictures/default.jpg";
+                entryData.image = "./publications/pictures/default.jpg";
             }
 
             // Create a new Article object
@@ -104,7 +104,7 @@ async function loadTSVToArticles(tsvFilePath) {
 async function initializeArticlesArray() {
     try {
         // Load the TSV file
-        await loadTSVToArticles('./publicationsInput.tsv');
+        await loadTSVToArticles('./publications/publicationsInput.tsv');
         console.log("Articles array initialized successfully.");
     } catch (error) {
         console.error("Failed to initialize array:", error);

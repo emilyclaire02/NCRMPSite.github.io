@@ -67,10 +67,10 @@ async function loadTSVToPeople(tsvFilePath) {
             // Add the picture path
             if (entryData.image != "") {
                 // Use the name as the image name
-                entryData.image = "aboutPictures/" + entryData.name + ".jpg";
+                entryData.image = "./about/aboutPictures/" + entryData.name + ".jpg";
             } else {
                 // If the image is not provided, use a default image
-                entryData.image = "aboutPictures/profile.webp";
+                entryData.image = "./about/aboutPictures/profile.webp";
             }
 
             // Create a new Person object
@@ -100,7 +100,7 @@ async function loadTSVToPeople(tsvFilePath) {
 async function initializePeopleArray() {
     try {
         // Load the TSV file
-        await loadTSVToPeople('./aboutInput.tsv');
+        await loadTSVToPeople('./about/aboutInput.tsv');
         console.log("People array initialized successfully.");
     } catch (error) {
         console.error("Failed to initialize array:", error);

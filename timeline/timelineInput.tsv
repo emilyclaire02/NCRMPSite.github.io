@@ -1,0 +1,62 @@
+A short overview of the event. Must be 50 characters or less A short overview of the event. Must be 50 characters or less	 A description of the event	 If there is media associated with the event, describe the type. If none, put null. Must be image, video, or audio 	 The media that is visible to  users. Provide the name of the file and put the file in the media folder 	 An icon that is visible on the timeline preview. Input the name of the icon or input "image" to use the image associated with the  event, null if none.	 The date the event occured in MM-DD-YYYY format	The region the event was a part of:   caribbean  florida all	Credit for who  took the photo	https://www.coris.noaa.gov/activities/capacity_assessment/usvitimeline.pdf
+preview	description	mediaType	media	icon	date	region	credit	
+First lighthouses	First still standing lighthouses constructed in the Florida Keys (Key Biscayne and Key West)			https://drive.google.com/file/d/1P5oknRlRYSjVMT68xTzCaJiXJPfuKP61/view?usp=drive_link	01-01-1846	florida		
+Fort Jefferson	Construction of Fort Jefferson on Garden Key began taking nearly 30 years to complete. The "Guardian of the Gulf" was used by the Union Navy in the Civil War to blockade southern shipping routes. Learn more about Fort Jefferson here. 		Hey, are SVG files ok for the icons?	https://drive.google.com/file/d/1ml1Dy22ptWaMGyps7Zoai6f5GVRoImz3/view?usp=drive_link	12-01-1846	florida		
+US Commission of Fish and Fisheries	First federal agency that sought to research and manage fisheries in US waters. 			https://drive.google.com/file/d/1o27HGyJdTAV1lIpwKol13ygvFfMfN1aX/view?usp=drive_link	01-01-1871	all		
+Alligator Reef Light	Named after the Schooner Alligator that was part of the US Navy’s anti-piracy squadron based in Key West. Today, it is one of the FKNMS Sanctuary Preservation Areas (SPAs) located in the middle Keys. 			https://drive.google.com/file/d/1P5oknRlRYSjVMT68xTzCaJiXJPfuKP61/view?usp=drive_link	01-01-1873	florida		
+Treaty of Paris	The end of the Spanish-American War. Spain cedes Puerto Rico, Guam, and the Philippines to the United States.			https://drive.google.com/file/d/1SOjuc0cge7FIbwTPWAkO-74gdrdsZqFT/view?usp=drive_link	1-1-1898	caribbean		
+Overseas Railway 	Completion of the overseas railway that connected South Florida to Key West. It remained in operation until its destruction in 1935 by the "Storm of the Century", a category 5 hurricane.			https://drive.google.com/file/d/1jL-1hZ2tN33326qijYxtJCyJdpI6wfST/view?usp=drive_link	1-1-1912	florida		
+USVI 	The US Virgin Islands (St. Thomas, St. Croix, and St. John) are purchased from Denmark.  Before the sale to the US, the USVI was a major center for sugar plantations that were worked by enslaved Africans.   			https://drive.google.com/file/d/1fR3t4LZX-_8uYCGJx5-imL6qgI6hoH8o/view?usp=drive_link	1-1-1917	caribbean		
+Everglades hydrology alteration 					1-1-1920	florida		
+Overseas Highway	After its destruction in 1935, the State of Florida purcahsed the overseas reailway. In 1938, the construction to convert the railway into a 113 mile roadway was completed.			https://drive.google.com/file/d/1CAGhGjr5QaJGMAgsXLDTe8ioXa2c98r1/view?usp=drive_link	1-1-1938	florida		
+Everglades National Park 	Everglades National Park was founded in 1947 to protect the unique and fragile ecosystem of the Everglades, which was threatened by drainage projects, agriculture, and development. The park preserves vital wetlands that support diverse wildlife, including wading birds, alligators, and the endangered Florida panther, while also safeguarding the region’s water resources. The Everglades watershed provides essential nutrients to Florida Bay which supports a wide variety of commercially and recreationally important species.			https://drive.google.com/file/d/1NknbqAVeWtYiaJjgAGwlAyF6g0gNIVbl/view?usp=drive_link	01-01-1947	florida		
+Virgin Islands National Park	Virgin Islands National Park, established in 1956, protects the natural beauty and cultural heritage of St. John, including pristine beaches, coral reefs, and tropical forests. The park also preserves historical sites such as pre-Columbian petroglyphs and colonial-era ruins, while supporting diverse marine and terrestrial wildlife.			https://drive.google.com/file/d/1811FmNz-hTIrZqaEYVtKte88q_1G7mzy/view?usp=drive_link	01-01-1956	caribbean		
+John Pennekamp Coral Reef State Park	John Pennekamp Coral Reef State Park, opened in 1963, was the first underwater park in the United States, protecting part of the Florida Reef—the only living coral barrier reef in the continental U.S. The park's seagrass beds, mangroves, and vibrant coral reefs provide critical habitat for diverse marine life and offer visitors opportunities for snorkeling, diving, and boating.			https://drive.google.com/file/d/1i5zmq_-QwAAq-V2kRMZCXBflMjZqkH7j/view?usp=drive_link	01-01-1963	florida		
+Buck Island National Monument	Buck Island Reef National Monument, located off the coast of St. Croix in the U.S. Virgin Islands, was established in 1961 to protect its vibrant coral reef ecosystem and diverse marine life. The monument features an underwater snorkeling trail, white sandy beaches, and nesting sites for endangered sea turtles, making it a critical conservation area and popular destination for eco-tourism.			https://drive.google.com/file/d/1811FmNz-hTIrZqaEYVtKte88q_1G7mzy/view?usp=drive_link	1-1-1961	caribbean		
+Bahia Honda State Park	Bahia Honda State Park is established in 1961. Located at the Southern end of the 7-mile bridge, the island was an important staging ground for the construction of the Overseas Railway and later the highway.			https://drive.google.com/file/d/1LetLeMAyxNUzQFSLO-lcLLn3up2phjXN/view?usp=drive_link	6-1-1961	florida		
+Endangered Species Act	The Endangered Species Act (ESA), passed in 1973, is a key U.S. law designed to protect and recover species at risk of extinction. It provides a framework for listing species as endangered or threatened, designating critical habitats, and implementing conservation plans to safeguard these species and their ecosystems.			https://drive.google.com/file/d/1dsHelSh8n0Of0QvetNniA828bdBtpVKg/view?usp=drive_link	1-1-1969	all		
+Marine Mammal Protection Act	The Marine Mammal Protection Act (MMPA), passed in 1972, is a U.S. law aimed at protecting marine mammal species and their habitats. The act prohibits the hunting, capturing, or harassment of marine mammals, while promoting the conservation and management of marine mammal populations through research, monitoring, and conservation efforts.			https://drive.google.com/file/d/1dsHelSh8n0Of0QvetNniA828bdBtpVKg/view?usp=drive_link	1-1-1972	all		
+White Band Disease	White band disease, a coral disease that effects acroporids, is documented for the first time in colonies of elkhorn and staghorn corals at Tague Bay, St. Croix			https://drive.google.com/file/d/1lAaMlexfTxh5QjuTqhZ6wWdRl0yGz-rl/view?usp=drive_link	1-1-1975	all		
+Key Largo National Marine Sanctuary	Existing from 1975-1990, the Key Largo National Marine Sanctuary preceded the Florida Keys National Marine sanctuary and protected the waters from Carysfort reef to Molases reef.			https://drive.google.com/file/d/1SaPizYWf2WDvqKLRw-rghp9aI13tEd6l/view?usp=drive_link	1-1-1975	florida		
+CFMC	Carib fish council			https://drive.google.com/file/d/1o27HGyJdTAV1lIpwKol13ygvFfMfN1aX/view?usp=drive_link		caribbean		
+Biscayne National Park					1-1-1980	florida		
+Looe Key National Marine Sanctuary				https://drive.google.com/file/d/1SaPizYWf2WDvqKLRw-rghp9aI13tEd6l/view?usp=drive_link	1-1-1981	florida		
+Snapper-Grouper Fishery Management Plan	South Atlantic Fishery Management Council to manage 55 species of fish			https://drive.google.com/file/d/1o27HGyJdTAV1lIpwKol13ygvFfMfN1aX/view?usp=drive_link	1-1-1983	florida		
+designated Oculina Bank Habitat Area of Particular Concern	expanded in 2000 and in 2015				1-1-1984	florida		
+ban on queen conch harvest					1-1-1986			
+Florida Keys national Marine Sanctuary				https://drive.google.com/file/d/1SaPizYWf2WDvqKLRw-rghp9aI13tEd6l/view?usp=drive_link	1-1-1990	florida		
+Goliath Grouper closed to harvesting	closed in Caribbean in 1993, next stock assessment in 2023			https://drive.google.com/file/d/1o27HGyJdTAV1lIpwKol13ygvFfMfN1aX/view?usp=drive_link	6-1-1990	all		
+Nassua Grouper closed to harvesting				https://drive.google.com/file/d/1o27HGyJdTAV1lIpwKol13ygvFfMfN1aX/view?usp=drive_link	12-1-1990	all		
+Goliath Grouper listed as an ESA species of concern	removed from list in 2006				1-1-1991	all		
+Dry Tortugas National Park					1-1-1992	florida		
+Hurricane Andrew				https://drive.google.com/file/d/1R7VPx8hS7QGdeo_oByZ1zNtIxaC0K-ET/view?usp=drive_link	8-1-1992	florida		
+Magnuson-Stevens Fishery Conservation Act	Essential Fish Habitat, Bycatch Monitoring and Reduction			https://drive.google.com/file/d/1o27HGyJdTAV1lIpwKol13ygvFfMfN1aX/view?usp=drive_link	1-1-1996	all		
+FKNMS Management Plan 	allowing marine zoning, reserves and SPAs				1-1-1997	florida		
+Sambo Ecological Reserve, FKNMS					6-1-1997	florida		
+Tortugas Ecological Reserves in FKNMS					1-1-2000	florida		
+Coral Reef Protection Act					4-1-2000	florida		
+Aquaculture Certificate of Registration	ornamental harvest regulations, amended 2015				8-1-2000	all		
+Monroe County Sanitary Wastewater Master Plan	state ordered monroe to convert to sewer system in 1999. completed in 2017 (with some exceptions)				12-1-2000	florida		
+Marine Turtle Protection Act					1-1-2004	all		
+US Commisson on Ocean Policy	mandated to sumbit recommendations for a corrdinated and comprehensive national ocean policy				1-1-2004	all		
+A cervicornis and A palmata listed as threatened ESA					1-1-2006	all		
+Research Natural Area of Dry Tortugas National Park					1-1-2007	florida		
+22 corals listed as threatened/endangedered ESA (7 Atlantic species)					1-1-2014	all		
+Nassau Grouper listed as threatened				https://drive.google.com/file/d/1o27HGyJdTAV1lIpwKol13ygvFfMfN1aX/view?usp=drive_link	1-1-2016	all		
+Florida Springs and Aquifer Protection Act	goal is to reduce nitrogen pollution by enhancing septic tanks				6-1-2016	florida		
+Hurricane Maria	Puerto rico hit bad			https://drive.google.com/file/d/1R7VPx8hS7QGdeo_oByZ1zNtIxaC0K-ET/view?usp=drive_link	9-20-2017	caribbean		
+Major red tide events								
+PortMiami deep dredge project	estimated half-million corals killed							
+Global coral bleaching event								
+Stony Coral Disease with Tissue Loss								
+Bleaching events 2023, 14/15								
+GG regs				https://drive.google.com/file/d/1o27HGyJdTAV1lIpwKol13ygvFfMfN1aX/view?usp=drive_link				
+Hurricane that hit fort jeff				https://drive.google.com/file/d/1R7VPx8hS7QGdeo_oByZ1zNtIxaC0K-ET/view?usp=drive_link				
+kristen jacobs SEFL								
+R. Hump + TNER								
+2013 NCRMP 								
+US carib island wide surveys								
+SEFL NCRMP 2018								
+Decreased grid size FL from 100x100 to 50x50								
+SEDAR with RVC data								
+SEDAR 80+84 carib								

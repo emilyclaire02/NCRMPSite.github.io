@@ -1,0 +1,189 @@
+/* Basic style for all pages */
+
+html {
+    font-family: Cambria, "Arial Narrow", Calibri, sans-serif;
+}
+
+body {
+    background-color: #E4F0F8;
+    color: #00467F;
+}
+
+h1 {
+    text-align: center;
+}
+
+/* Style for navigation bar */
+
+.topnav {
+    background-color: #0093D0;
+    overflow: hidden;
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+  
+.topnav a {
+    float: left;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+  
+.topnav a:hover {
+    background-color: #59B9E0;
+    color: black;
+}
+  
+.topnav a.active {
+    background-color: #00467F;
+    color: white;
+}
+
+/* Style for the publications page */
+
+.articles {
+    align-items: center;     
+    justify-content: center;  
+    padding: 20px;     
+}
+
+#articleList {
+    display: flex;
+    flex-wrap: wrap;
+    list-style-type: none;
+    align-items: center;     
+    justify-content: center;  
+    padding: 0;
+    margin: 0;
+}
+
+#articleList li{
+    flex-direction: column;
+    margin: 10px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 10px;
+    width: 29vw;
+}
+
+
+.articleEntry {
+   height: 50vh; 
+
+   overflow: auto;
+}
+
+.articles img {
+    height: auto;
+    border-radius: 10px;
+    max-width: 100%;
+}
+
+.img-container {
+    position: relative;
+    display: inline-block; 
+    width: 27vw;  
+    height: auto;
+}
+
+.img-container img {
+    display: block; 
+    width: 100%;
+    height: 30vh; 
+    object-fit: cover;
+}
+
+.bullet-points {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: none;
+    background: rgba(255, 255, 255, 0.913);
+    color: black;
+    overflow-y: auto; 
+    padding: 0px;
+    list-style-type: none;
+    justify-content: center;    
+    align-items: center;      
+}
+
+.bullet-points ul {
+    display: none;
+}
+
+.img-container:hover .bullet-points {
+    display: block; /* Show bullet points on hover */
+}
+
+.citation {
+    margin-top: auto;
+    text-align: right;
+}
+
+#search {
+    display: flex;
+    justify-content: center;  
+    margin-top: 20px; 
+    border-color: #00467F;
+}
+
+#searchInput {
+    width: 50%;  
+    padding: 10px;  
+    font-size: 16px; 
+}
+
+#banner {
+    width: 100vw; 
+    height: 25vh; 
+    max-height: 100vh;
+    object-fit: fill; 
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+
+/* Scaling for small screens */
+@media only screen and (max-width: 800px) {
+    .topnav a {
+        font-size: 14px;
+    }
+
+    #articleList li {
+        width: 60%; 
+    }
+
+    #searchInput {
+        width: 90%;
+    }
+
+    .img-container {
+        width: 100%;
+    }
+
+    #articleList .bullet-points li {
+        width: 100%; 
+    }
+
+    .bio {
+        flex-direction: column;
+        width: 100%; 
+    }
+
+    .flip-card {
+        width: 80vw;
+        height: 25vh;
+    }
+
+    .flip-card-back {
+        font-size: 3vw; 
+    }
+}

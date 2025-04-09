@@ -79,7 +79,7 @@ function showCurrentPhoto(direction = 'next') {
     // Add the photo
     let photo = document.createElement('img');
     // The photo src uses the name of the photo in the photos array
-    photo.src = "./homePhotos/" + currentPhoto.name; 
+    photo.src = "./home/homePhotos/" + currentPhoto.name; 
     // Get the other attributes from the array
     photo.alt = currentPhoto.description;
     photo.id = currentPhoto.name;

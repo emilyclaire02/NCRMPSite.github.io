@@ -57,7 +57,7 @@ function displayArticles() {
 
         img.onerror = function() {
             this.onerror = null; // Prevent infinite loop in case the default image also fails
-            this.src = "pictures/NOAAlogo.png";
+            this.src = "./publications/pictures/NOAAlogo.png";
         };
 
         imgContainer.appendChild(img);

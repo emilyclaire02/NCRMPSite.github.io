@@ -273,7 +273,7 @@ window.onload = function () {
 
 async function initializeTimeline() {
     try {
-        await loadTSVToTimeline('./timelineInput.tsv'); // Wait for TSV to load
+        await loadTSVToTimeline('./timeline/timelineInput.tsv'); // Wait for TSV to load
         console.log("Timeline initialized successfully.");
     } catch (error) {
         console.error("Failed to initialize timeline:", error);
@@ -303,14 +303,16 @@ function showCurrentEntry() {
         media.src = currentEntry.media; 
         media.alt = `media`;
         media.id = "timeline-media";
+        media.setAttribute("style", "height: 34vh;");
     } else if (currentEntry.mediaType == "video") {
         media = document.createElement('iframe');
         media.src = currentEntry.media; // Assuming `currentEntry.videoId` contains the YouTube video ID
         media.title = "YouTube video player"; // Accessibility title
         media.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"; // Permissions for video playback
         media.allowFullscreen = true; // Enable fullscreen option
+        media.setAttribute("style", "height: 34vh;");
     }
-    media.setAttribute("style", "height: 34vh;");
+    
 
     // Create the container for the photo credit
     const creditContainer = document.createElement('div');
@@ -460,7 +462,7 @@ function buildTimeline() {
         // Add text and image
         if (event.icon !== "none") {
             const img = document.createElement("img");
-            img.src = event.icon === "image" ? event.media : `timelineMedia/${event.icon}`;
+            img.src = event.icon === "image" ? event.media : `./timeline/timelineMedia/${event.icon}`;
             img.alt = "flag icon";
             img.className = "flag-image";
             flagContent.appendChild(img);
@@ -602,7 +604,7 @@ async function loadTSVToTimeline(tsvFilePath) {
             });
 
             if (entryData.mediaType === "image") {
-                entryData.media = "timelineMedia/" + entryData.media;
+                entryData.media = "./timeline/timelineMedia/" + entryData.media;
             }
 
             // Create a TimelineEntry and add it to the timeline
