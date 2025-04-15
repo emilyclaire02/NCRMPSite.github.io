@@ -312,7 +312,7 @@ function showCurrentEntry() {
         media.allowFullscreen = true; // Enable fullscreen option
         media.setAttribute("style", "height: 34vh;");
     }
-    
+    x
 
     // Create the container for the photo credit
     const creditContainer = document.createElement('div');

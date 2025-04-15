@@ -184,3 +184,59 @@ p {
     display: hidden;
     justify-content: center;  /* Centers vertically */
 }
+
+@media only screen and (max-width: 800px) {
+    #glossy-list {
+        display: flex;
+        flex-direction: column; /* Stack items vertically */
+        gap: 20px; /* Add spacing between images */
+        justify-content: flex-end;
+        margin: 60px;
+    
+    }
+    
+    /* Align one image to the right */
+    .flex-container img:last-child {
+        margin-left: auto; /* Push the last image to the right */
+    }
+    
+    /* Target the images using their class */
+    .glossy-picture {
+        width: 80vw; /* Set the width */
+        height: auto; /* Maintain aspect ratio */
+        margin: 10px; /* Optional: Add spacing between images */
+        display: block;
+        margin: 0 auto;
+        border-radius: 4px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        transition: width 0.5s ease-in-out, height 0.5s ease-in-out;
+    }
+    
+    .glossy-picture:hover {
+        width: 82vw;
+        height: auto;
+    }
+    
+    .reportMedia {
+        height: 200px;
+        width: auto;
+    }
+    
+    .report-section {
+        display: flex;
+        flex-direction: column;  /* Stack the h2 title and the report content vertically */
+        align-items: center;  /* Center the items horizontally */
+        width: 45%;  /* Adjust the width of each report section */
+    }
+    
+    .reports {
+        display: flex;
+        overflow-x: auto; /* Enables horizontal scrolling */
+        white-space: nowrap; /* Prevents images from wrapping */
+        padding-bottom: 10px; /* Prevents scrollbar from covering images */
+        scroll-snap-type: x mandatory; /* Smooth scrolling effect */
+        gap: 20px;
+        width: 100%;  /* Adjust width to control the size of each report section */
+    }
+    
+}
