@@ -120,7 +120,7 @@ h1 {
 }
 
 .img-container:hover .bullet-points {
-    display: block; /* Show bullet points on hover */
+    display: block; 
 }
 
 .citation {

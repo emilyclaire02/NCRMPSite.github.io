@@ -161,25 +161,30 @@ function buildPage() {
 
     // Create the Current VSFS Interns section
 
-    // Create the Current Interns header
-    const currVSFSInternsHeader = document.createElement("h2");
-    currVSFSInternsHeader.className = "about-header";
-    currVSFSInternsHeader.textContent = "VSFS Interns";
-    aboutUs.appendChild(currVSFSInternsHeader);
-
-    // Create the Current Interns container where the bios will go
-    const currVSFSInternsBio = document.createElement("div");
-    currVSFSInternsBio.className = "bio";
-    currVSFSInternsBio.id = "current-vsfs-interns-bios";
-
-    // Get the Current Interns and add them to the Current Interns container
     const currentVSFSInterns = people.filter(person => person.group === "currentVSFSIntern");
-    currentVSFSInterns.forEach((person) => {
-        buildPerson(person, currVSFSInternsBio);
-    });
 
-    // Append the Past VSFS Interns container to the page
-    aboutUs.appendChild(currVSFSInternsBio);
+    // Only create the Current VSFS Interns section if there are current VSFS Interns
+    if(currentVSFSInterns.length > 0) {
+        // Create the Current Interns header
+        const currVSFSInternsHeader = document.createElement("h2");
+        currVSFSInternsHeader.className = "about-header";
+        currVSFSInternsHeader.textContent = "VSFS Interns";
+        aboutUs.appendChild(currVSFSInternsHeader);
+
+        // Create the Current Interns container where the bios will go
+        const currVSFSInternsBio = document.createElement("div");
+        currVSFSInternsBio.className = "bio";
+        currVSFSInternsBio.id = "current-vsfs-interns-bios";
+
+        // Get the Current Interns and add them to the Current Interns container
+        
+        currentVSFSInterns.forEach((person) => {
+            buildPerson(person, currVSFSInternsBio);
+        });
+
+        // Append the Past VSFS Interns container to the page
+        aboutUs.appendChild(currVSFSInternsBio);
+    }
 
     // Create the Past Interns section
 
@@ -205,26 +210,29 @@ function buildPage() {
 
     // Create the Past VSFS Interns section
 
-    // Create the Past VSFS  Interns header
-    const pastVSFSInternsHeader = document.createElement("h2");
-    pastVSFSInternsHeader.className = "about-header";
-    pastVSFSInternsHeader.textContent = "VSFS Interns";
-    aboutUs.appendChild(pastVSFSInternsHeader);
-
-    // Create the Past VSFS  Interns container where the bios will go
-    const pastVSFSInternsBio = document.createElement("div");
-    pastVSFSInternsBio.className = "bio";
-    pastVSFSInternsBio.id = "current-vsfs-interns-bios";
-
-    // Get the Past VSFS  Interns and add them to the Past VSFS Interns container
     const pastVSFSInterns = people.filter(person => person.group === "pastVSFSIntern");
-    pastVSFSInterns.forEach((person) => {
-        buildPerson(person, pastVSFSInternsBio);
-    });
 
-    // Append the Past VSFS Interns container to the page
-    aboutUs.appendChild(pastVSFSInternsBio);
+    // Only create the Past VSFS Interns section if there are past VSFS Interns
+    if(pastVSFSInterns.length > 0) {
+        // Create the Past VSFS  Interns header
+        const pastVSFSInternsHeader = document.createElement("h2");
+        pastVSFSInternsHeader.className = "about-header";
+        pastVSFSInternsHeader.textContent = "VSFS Interns";
+        aboutUs.appendChild(pastVSFSInternsHeader);
 
+        // Create the Past VSFS  Interns container where the bios will go
+        const pastVSFSInternsBio = document.createElement("div");
+        pastVSFSInternsBio.className = "bio";
+        pastVSFSInternsBio.id = "current-vsfs-interns-bios";
+
+        // Get the Past VSFS  Interns and add them to the Past VSFS Interns container
+        pastVSFSInterns.forEach((person) => {
+            buildPerson(person, pastVSFSInternsBio);
+        });
+
+        // Append the Past VSFS Interns container to the page
+        aboutUs.appendChild(pastVSFSInternsBio);
+    }
 }
 function buildPerson(person, group) {
     // Person container

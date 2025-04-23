@@ -76,7 +76,7 @@ To add a new page to link to, follow this template.
 
 ### Publications
 
-The JavaScript function, displayArticles() in code.js, dynamically generates HTML content to display a list of articles. It iterates through an array of article objects, creating HTML elements for each article's title, authors, image, bullet points, and citation button. The function then appends these elements to a main list, which is finally added to a container element in the HTML document.
+The JavaScript function, displayArticles() in publications.js, dynamically generates HTML content to display a list of articles. It iterates through an array of article objects, creating HTML elements for each article's title, authors, image, bullet points, and citation button. The function then appends these elements to a main list, which is finally added to a container element in the HTML document.
 
 The Articles class in article.js contains a constructor with all the elements needed to display a publication. The parameters are: 
 
@@ -160,7 +160,7 @@ The initializePeopleArray() function will then take every line of the spreadshee
 
 ### Timeline 
 
-The JavaScript function, buildTimeline() in code.js, dynamically generates HTML content to display a timeline. It iterates through an array of timeline objects, creating HTML elements for each entry.
+The JavaScript function, buildTimeline() in timeline.js, dynamically generates HTML content to display a timeline. It iterates through an array of timeline objects, creating HTML elements for each entry.
 
 The TimelineEntry class in timeline.js contains a constructor with all the elements needed to display a new flag on the timeline. The parameters are: 
 

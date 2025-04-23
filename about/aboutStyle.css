@@ -97,19 +97,11 @@ h1 {
     backface-visibility: hidden;  /* Hides the back face when not visible */
 }
 
-/* .flip-card-back {
-    background-color: #E4F0F8;
-    color: #00467F;
-    transform: rotateY(180deg); 
-    display:flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    font-size: 1.2vw; 
-    margin-top: 8vh;
-    padding-left: 10vw;
-} */
- 
+.flip-card-front img:hover {
+    filter: brightness(90%);
+    transition: filter 0.3s ease;
+}
+
 .flip-card-back {
     display: flex;
     transform: rotateY(180deg); 
@@ -133,23 +125,39 @@ h1 {
         margin-bottom: 1vh;
     }
 
+        .bio {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .contact-info {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
     .person {
         width: 50vw;
         height: auto;
     }
     
     .card-image {
-        width: 50vw; 
+        width: 100%;
+        height: auto;
+        max-height: 250px;
+        object-fit: cover;
     }
     
     .flip-card {
-        width: 45vw;
-        height: 30vh;
+        width: 100%;
+        max-height: 250px;
+        height: auto;
+        aspect-ratio: 1 / 1;
+        margin-bottom: 2vh;
         position: relative;
         transition: transform 1.0s;
-        transform-style: preserve-3d; 
+        transform-style: preserve-3d;
         cursor: pointer;
-        margin-bottom: 10vw;
     }
 
     .flip-card-front, .flip-card-back {
