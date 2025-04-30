@@ -3,9 +3,10 @@
 let currentEntry = null;
 let currentEntryIndex = 0;
 // The year of the first event in the timeline
-let firstYear = 2002;
+let firstYear = 1846;
 // The year of the last event in the timeline
-let finalYear = 2024;
+let finalYear = 2025;
+let currentScale = 1;
 
 
 // Implement scrolling through timeline
@@ -79,6 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
             scale = computeScale(scale, wheelEvent.deltaY);
             // Update the width of the timeline element
             zoomableElement.style.width = scale * 100 + '%';
+            console.log(scale);
     
             // Zoom in according to the mouse position on the timeline
             if (mouseHasMoved) {
@@ -136,12 +138,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const synchronizeZoomAndScroll = () => {
         yearsTimeline.style.width = eventsTimeline.style.width;
         yearsTimeline.scrollLeft = eventsTimeline.scrollLeft;
+        buildYears();
     };
 
     eventsTimeline.addEventListener('wheel', (wheelEvent) => {
         if (Math.abs(wheelEvent.deltaY) > Math.abs(wheelEvent.deltaX)) {
             wheelEvent.preventDefault();
             scale = Math.max(1, scale - wheelEvent.deltaY * 0.005);
+            currentScale = scale;
             eventsTimeline.style.width = scale * 100 + '%';
             synchronizeZoomAndScroll();
         }
@@ -304,6 +308,13 @@ function showCurrentEntry() {
         media.alt = `media`;
         media.id = "timeline-media";
         media.setAttribute("style", "height: 34vh;");
+        mediaContainer.appendChild(media);
+            // Create the container for the photo credit
+        const creditContainer = document.createElement('div');
+        creditContainer.id = "timeline-photo-credit"
+        creditContainer.innerHTML = `${currentEntry.credit}`
+        mediaContainer.appendChild(creditContainer);
+        entryContainer.appendChild(mediaContainer);
     } else if (currentEntry.mediaType == "video") {
         media = document.createElement('iframe');
         media.src = currentEntry.media; // Assuming `currentEntry.videoId` contains the YouTube video ID
@@ -311,18 +322,18 @@ function showCurrentEntry() {
         media.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"; // Permissions for video playback
         media.allowFullscreen = true; // Enable fullscreen option
         media.setAttribute("style", "height: 34vh;");
-    }
-    x
+        mediaContainer.appendChild(media);
+        // Create the container for the photo credit
+        const creditContainer = document.createElement('div');
+        creditContainer.id = "timeline-photo-credit"
+        creditContainer.innerHTML = `${currentEntry.credit}`
+        mediaContainer.appendChild(creditContainer);
+        entryContainer.appendChild(mediaContainer);
+    } 
 
-    // Create the container for the photo credit
-    const creditContainer = document.createElement('div');
-    creditContainer.id = "timeline-photo-credit"
-    creditContainer.innerHTML = `${currentEntry.credit}`
+
     // creditContainer.setAttribute("style", "text-align: right;");
     // creditContainer.setAttribute("style", "font-size: 10px;");
-
-    mediaContainer.appendChild(media);
-    mediaContainer.appendChild(creditContainer);
 
     const textContainer = document.createElement('div');
     textContainer.id = "entry-description"
@@ -341,7 +352,6 @@ function showCurrentEntry() {
     description.textContent = currentEntry.description;
 
     // Append the main list to the timeline container
-    entryContainer.appendChild(mediaContainer);
     //entryContainer.appendChild(media);
     textContainer.appendChild(title);
     textContainer.appendChild(year);
@@ -375,6 +385,38 @@ function setEntry(entryIndex) {
     showCurrentEntry();
 }
 
+// function buildYears() {
+//     function createSpacer(width, flexGrow) {
+//         const spacerDiv = document.createElement('div');
+//         spacerDiv.classList.add('spacer', 'year-spacer');
+//         if (width) {
+//             spacerDiv.style.width = width;
+//         }
+//         if (flexGrow) {
+//             spacerDiv.style.flexGrow = flexGrow;
+//         }
+//         return spacerDiv;
+//     }
+
+//     // Get the container from the HTML document
+//     const yearsTimeline = document.getElementById('years-timeline');
+
+//     // Clear the existing content
+//     yearsTimeline.innerHTML = '';
+
+//     yearsTimeline.appendChild(createSpacer('26px', null));
+
+//     for (let i = firstYear; i <= finalYear; i++) {
+//         yearsTimeline.appendChild(createYear(i));
+
+//         if (i < finalYear) {
+//             yearsTimeline.appendChild(createSpacer(null, '1'));
+//         }
+//     }
+
+//     yearsTimeline.appendChild(createSpacer('26px', null));
+// }
+
 function buildYears() {
     function createSpacer(width, flexGrow) {
         const spacerDiv = document.createElement('div');
@@ -396,16 +438,38 @@ function buildYears() {
 
     yearsTimeline.appendChild(createSpacer('26px', null));
 
-    for (let i = firstYear; i <= finalYear; i++) {
-        yearsTimeline.appendChild(createYear(i));
+    // for (let i = firstYear; i <= finalYear; i++) {
+    //     yearsTimeline.appendChild(createYear(i));
 
-        if (i < finalYear) {
-            yearsTimeline.appendChild(createSpacer(null, '1'));
+    //     if (i < finalYear) {
+    //         yearsTimeline.appendChild(createSpacer(null, '1'));
+    //     }
+    // }
+
+
+    if(currentScale >= 5.1) {
+        for (let i = firstYear; i <= finalYear; i++) {
+            yearsTimeline.appendChild(createYear(i));
+
+            if (i < finalYear) {
+                yearsTimeline.appendChild(createSpacer(null, '1'));
+            }
+        }
+        console.log("building all years");
+    } else {
+        for (let i = firstYear; i <= finalYear; i++) {
+            yearsTimeline.appendChild(createYear(i));
+    
+            if (i < finalYear) {
+                yearsTimeline.appendChild(createSpacer(null, '1'));
+            }
+            i = i + 5;
         }
     }
 
     yearsTimeline.appendChild(createSpacer('26px', null));
 }
+
 
 
 function buildTimeline() {
@@ -460,7 +524,7 @@ function buildTimeline() {
         if (event.specialId) flagContent.id = event.specialId;
 
         // Add text and image
-        if (event.icon !== "none") {
+        if (event.icon !== "null") {
             const img = document.createElement("img");
             img.src = event.icon === "image" ? event.media : `./timeline/timelineMedia/${event.icon}`;
             img.alt = "flag icon";

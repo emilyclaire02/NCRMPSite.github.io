@@ -141,6 +141,11 @@ h1 {
     width: 100%; 
 }
 
+.reports img:hover {
+    filter: brightness(90%);
+    transition: filter 0.3s ease;
+}
+
 h2 {
     text-align: center;
     margin-bottom: 10px;
@@ -175,6 +180,11 @@ p {
     align-items: center;     
     height: 100%;            
     width: 100%;        
+}
+
+.status img:hover {
+    filter: brightness(90%);
+    transition: filter 0.3s ease;
 }
 
 #national_images {

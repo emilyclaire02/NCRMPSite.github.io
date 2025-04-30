@@ -15,27 +15,27 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 }).addTo(map);
 
 var puertoRicoIcon = L.icon({
-    iconUrl: './glossyMedia/puertoRicoIcon.png', 
+    iconUrl: './reports/reportsMedia/puertoRicoIcon.png', 
     iconSize: [70, 70],
 });
 
 var floridaIcon = L.icon({
-    iconUrl: './glossyMedia/floridaIcon.png', 
+    iconUrl: './reports/reportsMedia/floridaIcon.png', 
     iconSize: [70, 70],
 });
 
 var flowerGardensIcon = L.icon({
-    iconUrl: './glossyMedia/flowerGardensIcon.png', 
+    iconUrl: './reports/reportsMedia/flowerGardensIcon.png', 
     iconSize: [70, 70],
 });
 
 var virginIslandsIcon = L.icon({
-    iconUrl: './glossyMedia/virginIslandsIcon.png', 
+    iconUrl: './reports/reportsMedia/virginIslandsIcon.png', 
     iconSize: [70, 70],
 });
 
 var nationalIcon = L.icon({
-    iconUrl: './glossyMedia/nationalIcon.png', 
+    iconUrl: './reports/reportsMedia/nationalIcon.png', 
     iconSize: [70, 70],
 });
 
