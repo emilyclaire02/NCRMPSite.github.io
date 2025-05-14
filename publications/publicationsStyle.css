@@ -119,9 +119,10 @@ h1 {
     display: none;
 }
 
+
 .img-container:hover .bullet-points {
     display: block; 
-    transition: filter 0.3s ease;
+    
 }
 
 .citation {
