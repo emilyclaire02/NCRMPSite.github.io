@@ -47,7 +47,7 @@ const photos = [
     new Photo("Dendro with NOAA diver Grove.jpg", "NOAA Fisheries Photo by Caitlin Langwiser", "Dendrogyra cylindrus and NOAA diver Dr. Jay Grove"),
     new Photo("Scolymia.jpg", "NOAA Fisheries Photo by Caitlin Langwiser", "Scolymia"),
     new Photo("School of french grunts.JPG", "NOAA Fisheries Photo by Caitlin Langwiser", "School of french grunts (haemulon flavolineatum)"),
-    new Photo("O Fav in Tortugas.jpg", "NOAA Fisheries Photo by Caitlin Langwiser", "Oncorhynchus faveolata"),
+    new Photo("O Fav in Tortugas.jpg", "NOAA Fisheries Photo by Caitlin Langwiser", "Orbicella faveolata"),
     new Photo("NOAA diver Grove with hogfish.jpg", "NOAA Fisheries Photo by Caitlin Langwiser", "NOAA diver Dr. Jay Grove with hogfish (lachnolaimus maximus)"),
     new Photo("Golith grouper in FL keys_credit_Caitlin Langwiser.jpg", "NOAA Fisheries Photo by Caitlin Langwiser", "Goliath grouper in the Florida Keys (epinephelus itajara)"),
     new Photo("foureye juv.JPG", "NOAA Fisheries Photo by Caitlin Langwiser", "Juvenile foureye butterflyfish (chaetodon capistratus)"),
